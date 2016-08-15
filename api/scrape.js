@@ -1,10 +1,30 @@
 var request = require('request');
 var cheerio = require('cheerio');
-var corpus = {
-  indigo: [],
-  audible: [],
-  overdrive: []
+function Job(Title, Company, Logo, Location, ComDes, ResSum, ResLi, ReqSum, Reqli, CompenSum, Website, PostLink, DatePosted, DateExpiry,ApplyLink,ContactName,ContactEmail,ContactPhone,ContactPosition,Type,NotExpired) {
+    this.Title = Title;
+    this.Company = Company;
+    this.Logo= Logo;
+    this.Location= Location;
+    this.ComDes= ComDes;
+    this.ResSum= ResSum;
+    this.ResLi= ResLi;
+    this.ReqSum= ReqSum;
+    this.Reqli= Reqli;
+    this.CompenSum= CompenSum;
+    this.CompenLi= CompenLi;
+    this.Website= Website;
+    this.PostLink=PostLink;
+    this.DatePosted= DatePosted;
+    this.DateExpiry= DateExpiry;
+    this.ApplyLink= ApplyLink;
+    this.ContactName= ContactName;
+    this.ContactEmail= ContactEmail;
+    this.ContactPhone= ContactPhone;
+    this.ContactPosition= ContactPosition;
+    this.Type= Type; //contract/part-time/full-time
+    this.NotExpired= Boolean;
 };
+var jobs = [];
 
 request('https://www.freshbooks.com/careers', function(err,res,body) {
   if(!err) {
@@ -14,16 +34,16 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
       if (i > 0) {
         var links = cheerio.load(body)('h3 a', this);
         for (var n = 0; n < links.length ; n++){
+          var newJob = new Object();
           var link = 'https://www.freshbooks.com' + links[n].attribs.href
-          console.log(link);
+          newJob.PostLink = link;
+          //console.log(newJob.PostLink);
            request(link, function(err,res,body) {
             if (!err) {
               Title = cheerio.load(body)('h1').text();
               var p = (cheerio.load(body)('.job-description.u-text-wrap p:nth-child(1)').text().length>100) ? 1 : 2; 
-              //console.log(cheerio.load(body)('.job-description.u-text-wrap p:nth-child(1)').text().length)
-              Description = cheerio.load(body)('.job-description.u-text-wrap p:nth-child('+p+')').text();
-              console.log(Title, Description, '\n')
-              //console.log(Title)
+              newJob.ComDes = cheerio.load(body)('.job-description.u-text-wrap p:nth-child('+p+')').text();
+              console.log(newJob)
             } else {
               console.log(err)
             }
@@ -36,59 +56,3 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
     console.log(err);
   };
 });
-
-// request('https://www.chapters.indigo.ca/en-ca/books/audiobooks/', function (err,res,body) {
-//   if (!err) {
-//     var count = 0;
-//     cheerio.load(body)('.product-title').each(function(i,j) {
-//       var title = cheerio.load(body)(j).text();
-//       var link = 'https://www.chapters.indigo.ca' + cheerio.load(body)('a',this).attr("href");
-//         request(link, function (err, res, body) {
-//           if (!err) {
-//             cheerio.load(body)('html').each(function (index,j) {
-//               var author = cheerio.load(body)('a.item-page__contributor-link',this).text();
-//               var summary = cheerio.load(body)('div.item-page__item-description',this).text();
-
-//               corpus.indigo[i] = [i+1, title, author, summary];
-//               if (corpus.indigo.every(x => x != undefined) ) console.log(corpus.indigo)  //WHY?? !!x[0] is false
-
-//               // count++;
-//               // if (count >= 84) console.log(corpus.indigo);
-              
-//             })
-//           } else {
-//             console.log(err);
-//           };
-//         });
-//       //console.log(corpus.indigo)
-//     })
-//   } else {
-//     console.log(err);
-//   };
-// });
-
-//OVERDRIVE GENERATES A SEARCH PATH AND THEN DELETES IT AFTER USE 
-// request("http://toronto.lib.overdrive.com/5E1EC2C3-C4D6-4B16-9335-DE475C726563/10/50/en/SearchResults.htm?SearchID=53831579s&SortBy=CollDate", function (err, res, body) {
-//   if (!err) {
-//     cheerio.load(body)('html').each(function (i, j) {
-//       var title = cheerio.load(body)('a.tc-title').text();
-//       console.log(title)
-//     })
-//   } else {
-//     console.log("We’ve encountered an error: " + error);
-//   }
-// });
-
-//RARES: there must be something wrong
-// request('http://www.audible.com/newreleases/ref=a_mn_mt_ano_c26_carouselHeader?ie=UTF8&pf_rd_r=0AZSVE7W9NQS3DXSA8Y5&pf_rd_m=A2ZO8JX97D5MN9&pf_rd_t=101&pf_rd_i=anon-hp-redirect-mt&pf_rd_p=2564306222&pf_rd_s=center-26', function (err, res, body) {
-//   if (!err) {
-//     cheerio.load(body)('li.adbl-result-item').each(function (i, j) {
-//       var title = cheerio.load(body)('.adbl-prod-title a.adbl-link', this).text().replace(/^\s+|\s+$/g, "");
-//       var author = cheerio.load(body)('span.adbl-prod-author a.adbl-link', this).text().replace(/^\s+|\s+$/g, '');
-//       var img = cheerio.load(body)('div.adbl-prod-image-sample-cont img.adbl-prod-image').attr('src')
-//       console.log(i + " " +author)
-//     })
-//   } else {
-//     console.log(err);
-//   };
-// });
