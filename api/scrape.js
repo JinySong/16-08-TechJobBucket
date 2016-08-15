@@ -22,7 +22,7 @@ function Job(Title, Company, Logo, Location, ComDes, ResSum, ResLi, ReqSum, Reql
     this.ContactPhone= ContactPhone;
     this.ContactPosition= ContactPosition;
     this.Type= Type; //contract/part-time/full-time
-    this.NotExpired= Boolean;
+    this.NotExpired= true;
 };
 var jobs = [];
 
@@ -44,9 +44,19 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
             var newJob = new Job();
             newJob.PostLink = res.request.uri.href;
             if (!err) {
-              Title = cheerio.load(body)('h1').text();
-              var p = (cheerio.load(body)('.job-description.u-text-wrap p:nth-child(1)').text().length>100) ? 1 : 2; 
-              newJob.ComDes = cheerio.load(body)('.job-description.u-text-wrap p:nth-child('+p+')').text();
+              newJob.Title = cheerio.load(body)('h1').text();
+              var p = (cheerio.load(body)('.job-description.u-text-wrap p:nth-child(1)').text().length>100) ? 3 : 2; 
+              newJob.ResSum = cheerio.load(body)('.job-description.u-text-wrap p:nth-child('+p+')').text();
+              newJob.ResLi = (cheerio.load(body)('.job-description.u-text-wrap ul').html()).replace(/<li>/g,'').replace(/(\r\n|\n|\r)/gm,'').replace(/<\/li>/g,'xxx').split('xxx');
+              newJob.ReqLi = (cheerio.load(body)('.job-description.u-text-wrap ul:nth-of-type(2)').html()).replace(/<li>/g,'').replace(/(\r\n|\n|\r)/gm,'').replace(/<\/li>/g,'xxx').split('xxx');
+              newJob.ApplyLink = cheerio.load(body)('div.u-text-center a.button-primary.u-text-center').attr("href").split('</li>')[0];
+
+              newJob.ComDes = 'FreshBooks has a big vision. We launched in 2003 but we’re just getting started and there’s a lot left to do. We\'re a high performing team working towards a common goal: building a kick-ass online accounting application to help small businesses better manage their finances. Known for extraordinary customer service and based in Toronto, Canada, FreshBooks serves paying customers in over 120 countries. \n We\'re an ambitious bunch, with our eyes laser-focused on shipping extraordinary experiences to small business owners.  You\'ll be surrounded by talented team members who share a common vision for what an amazing software company could be, and have the opportunity to help shape how we build a world-class company right here in downtown Toronto.  '
+              newJob.Company = 'freshbooks';
+              newJob.Logo = 'https://www.freshbooks.com/_themes/freshbooks/img/responsive/header/freshbooks-logo-rgb.png';
+              newJob.Location = 'Toronto, ON';
+              newJob.Website = 'https://www.freshbooks.com'
+
               console.log(newJob)
             } else {
               console.log(err)
