@@ -17,7 +17,7 @@ var User = require('./models/User');
 app.use(express.static(__dirname + './../app'));
 
 //models.sequelize.sync().then(function(){
-	app.listen(8080,function(){
+	app.listen(8081,function(){
 		console.log('Listening on http://localhost:%s',8080);
 		console.log('Stop Server With CTRL + C');
 	});
@@ -110,5 +110,7 @@ app.get('/deleteAll',function(req,res) {
 	});
 })
 
+console.log(scrape)
+scrape();
 
    

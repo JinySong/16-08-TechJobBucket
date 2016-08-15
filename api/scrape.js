@@ -26,6 +26,8 @@ function Job(Title, Company, Logo, Location, ComDes, ResSum, ResLi, ReqSum, Reql
 };
 var jobs = [];
 
+
+function returnData() {
 request('https://www.freshbooks.com/careers', function(err,res,body) {
   if(!err) {
     var count = 0;
@@ -57,7 +59,26 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
               newJob.Location = 'Toronto, ON';
               newJob.Website = 'https://www.freshbooks.com'
 
-              console.log(newJob)
+              //console.log(newJob)
+              jobs.push(newJob)
+              //console.log(!!jobs[n])
+              //console.log(jobs)
+              var done = true;
+
+              for (var i=0; i<n; i++){
+                if (!!jobs[i]==!1) {
+                  done =false;
+                }
+              }
+
+              if (done) {
+                console.log('done');
+                console.log(jobs);
+                return jobs;
+                
+              } else {
+                console.log(n);
+              }
             } else {
               console.log(err)
             }
@@ -70,3 +91,9 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
     console.log(err);
   };
 });
+}
+
+// returnData();
+module.exports = returnData;
+
+//function shouldn't be surrounded by anything unless it's a method of the controller. it should be a code block
