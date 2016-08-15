@@ -1,6 +1,7 @@
 var express = require('express');
 //var models = require('./models');
 var app = express();
+var scrape = require('./scrape')
 
 //mongoose
 var mongoose = require('mongoose');

@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/JinySong/16-08-TechJobBucket#readme",
   "dependencies": {
+    "cheerio": "^0.20.0",
     "express": "^4.14.0",
     "mongodb": "^2.2.5",
-    "mongoose": "^4.5.9"
+    "mongoose": "^4.5.9",
+    "request": "^2.74.0"
   }
 }
