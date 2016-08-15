@@ -15,11 +15,11 @@
         };
 
         function getJob(id){
-          return self.jobs.filter(function(job) {return job.Id === id})[0];
+          return self.jobs.filter(function(job) {return job._id === id})[0];
         };
 
         function getFromServer(){
-          return $http.get('/jobData').then(function(res) {
+          return $http.get('/jobDB').then(function(res) {
             self.jobs = res.data;
           }, function(err) {
             console.log(err)

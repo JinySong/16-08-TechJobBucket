@@ -43,7 +43,7 @@
     ng-repeat="job in ctrl.filtered = (ctrl.jobs|
       filter: {Title:ctrl.search} | 
       orderBy: ctrl.sortSelect.sortField : ctrl.sortSelect.reverse)"
-    ng-click="ctrl.goToJob(job.Id)">
+    ng-click="ctrl.goToJob(job._id)">
     
     <div class="media-left"><img class="media-object" ng-src="{{job.Logo}}"></div>
     
@@ -52,17 +52,20 @@
         {{job.Title}}
       </h4>
       <div>
-        {{job.CompanyInfo | limitTo: 250 }}{{job.CompanyInfo.length > 250 ? '...' : ''}}
+        {{job.ComDes | limitTo: 250 }}{{job.CompanyInfo.length > 250 ? '...' : ''}}
       </div>
       <div>
         <ul>
           <li ng-repeat='responsibilty in job.Responsibilities | limitTo: 3'>{{responsibilty}}</li>
         </ul>
       </div>
-      <button class="btn btn-default pull-right" ng-href="{{job.Apply}}">Quick Apply</button>
+      <button class="btn btn-default pull-right" ng-href="{{job.ApplyLink}}">Quick Apply</button>
+      {{job.ApplyLink}}
       <!-- fix this -->
     </div>
   </div>
+
+
   
   <div class="text-center"><h3>You've reached the end of records</h3></div>
 </div>
