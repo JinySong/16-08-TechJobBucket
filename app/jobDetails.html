@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-sm-2 col-md-2"><img class="img-responsive" ng-src="{{ctrl.job.Logo}}"></div>
+  <div class="col-sm-10 col-md-10"><h1>{{ctrl.job.Title}}</h1></div>
+</div>
+
+<div >
+  <table class="table">
+    <tr ng-repeat="(key,value) in ctrl.job">
+    <!-- Filter out ID, logo, Title -->
+    <!-- list items for arrays -->
+      <td>{{key}}</td>
+      <td>{{value}}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="text-center"><button class="btn btn-default" ng-click='ctrl.goHome()'>Home</button></div>

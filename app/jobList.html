@@ -1,0 +1,68 @@
+<div class="container">
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">TechJobBucket</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <label for="search">Search</label>
+          <input ng-model="ctrl.search" 
+            type="text" 
+            class="form-control" 
+            id="search">
+        </div>
+        <div class="form-group">
+          <label for="search">Sort</label>
+          <select class="form-control" 
+            ng-options="sort as sort.label for sort in ctrl.sortOptions"
+            ng-model='ctrl.sortSelect'
+            ng-change="ctrl.currentPage = 0"></select>
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Sign-Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Log-In</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="media hvr-float" 
+    ng-repeat="job in ctrl.filtered = (ctrl.jobs|
+      filter: {Title:ctrl.search} | 
+      orderBy: ctrl.sortSelect.sortField : ctrl.sortSelect.reverse)"
+    ng-click="ctrl.goToJob(job.Id)">
+    
+    <div class="media-left"><img class="media-object" ng-src="{{job.Logo}}"></div>
+    
+    <div class="media-body">
+      <h4 class="media-heading">
+        {{job.Title}}
+      </h4>
+      <div>
+        {{job.CompanyInfo | limitTo: 250 }}{{job.CompanyInfo.length > 250 ? '...' : ''}}
+      </div>
+      <div>
+        <ul>
+          <li ng-repeat='responsibilty in job.Responsibilities | limitTo: 3'>{{responsibilty}}</li>
+        </ul>
+      </div>
+      <button class="btn btn-default pull-right" ng-href="{{job.Apply}}">Quick Apply</button>
+      <!-- fix this -->
+    </div>
+  </div>
+  
+  <div class="text-center"><h3>You've reached the end of records</h3></div>
+</div>
