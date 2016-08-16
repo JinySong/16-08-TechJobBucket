@@ -1,7 +1,9 @@
 (function(){
+	'use strict';
 	angular
-		.module('TJdb', ['ngRoute'])
-		.config(function($routeProvider) {
+		.module('TJdb', ['ngRoute', 'angular-jwt'])
+		.constant('HOST_BASE_URL', 'http://localhost:8080')
+		.config(function($routeProvider, $httpProvider) {
 			$routeProvider
 	            .when('/home', {
 	              templateUrl: 'jobList.html',
@@ -27,5 +29,31 @@
 	            .otherwise({
 	              redirectTo: '/home'
 	            });
+
+	    $httpProvider.interceptors.push(function(jwtHelper){
+				return{
+					request:function(config){
+						console.log('Requests');
+						console.log(config);
+						if(localStorage.authToken != undefined){
+							config.headers.authentication = localStorage.authToken;
+						}
+						return config;
+					},
+					response:function(response){
+						console.log('Response');
+						var auth_token = response.headers('authentication');
+						console.log(auth_token);
+						if(auth_token){
+							var decrypt_token = jwtHelper.decodeToken(auth_token);
+							console.log(decrypt_token);
+							if(decrypt_token.email){
+								localStorage.authToken = auth_token;
+							}
+						}
+						return response;
+					}
+				}
+			})
 	});
 })();

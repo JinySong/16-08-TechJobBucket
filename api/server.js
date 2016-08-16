@@ -2,11 +2,12 @@ var express = require('express');
 //var models = require('./models');
 var app = express();
 var scrape = require('./scrape')
+var bodyParser = require('body-parser')
 
-// var models 	= require('./../models');
-// var bcrypt	= require('bcryptjs');
-// var jwt		= require('jsonwebtoken');
-// var router 	= require('express').Router();
+//var models 	= require('./models') //sequelize
+var bcrypt	= require('bcrypt');
+var jwt		= require('jsonwebtoken');
+var router 	= require('express').Router();
 
 //mongoose
 var mongoose = require('mongoose');
@@ -20,6 +21,10 @@ var Job = require('./models/Job');
 var User = require('./models/User');
 
 app.use(express.static(__dirname + './../app'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:false}));
+
+//var authentication = require("./middleware/auth");
 
 //models.sequelize.sync().then(function(){
 	app.listen(8081,function(){
@@ -123,7 +128,7 @@ var newUser = {
 	password: 'asdf'
 }
 
-
+//use auth.js in middleware instead for encryption
 app.get('/addUser',function(req,res){
 	User(newUser).save(function(err){
 		if(err){
@@ -139,7 +144,7 @@ app.get('/addUser',function(req,res){
 });
 
 app.get('/userDB',function(req,res){
-	User.find({}, function(err, x) {
+	User.find({Email: req.Title}, function(err, x) {
 	    if (err) {
 	        console.log(err);
 	        res.status(400)
@@ -157,34 +162,77 @@ app.get('/deleteAllUser',function(req,res) {
 	});
 });
 
-// app.post('/addUser',function(req,res){
-// 	console.log('Registration Endpoint');
-// 	var __user = req.body;
 
-// 	/*
-// 	The Bcrypt library takes the user password entered in the
-// 	registration form and encrypts it with a salt that is 
-// 	randomly generated through 10 rounds of roundomization
-// 	*/
-// 	bcrypt.genSalt(10, function(err, salt) {
-// 	    bcrypt.hash(__user.password, salt, function(err, hash) {
-// 	        // Store hash in your password DB.
-// 	        if(!err){
-// 	        	/*
-// 	        	the resulting hash produced contains an encrypted
-// 	        	password and some information on how to decode the
-// 	        	password that only bcrypt knows.
-// 	        	*/
-// 	        	__user.password = hash;
-// 		        	models.Users.create(__user)
-// 		        	.then(function(user){
-// 		        	//remove password from response
+app.get('/userByE', function(req,res) {
+	User.find({}, function(err, x) {
+	    if (err) {
+	        console.log(err);
+	        res.status(400)
+	           .json({err:err});
+	    } else {
+	        res.json(x);
+	    }
+	});
+})
 
-// 		        	user.password ='';
-// 		        	res.json({user:user,msg:'Account Created'});
-// 		        })
 
-// 	        }
-// 	    });
-// 	});
-// });
+app.post('/addUser',function(req,res){
+	console.log('Registration Endpoint');
+	var __user = req.body;
+	console.log(__user)
+	bcrypt.genSalt(10, function(err, salt) {
+		console.log('bf bcrypt')
+	    bcrypt.hash(__user.password, salt, function(err, hash) {
+	        if(!err){
+	        	__user.password = hash;
+	        	User(__user).save(function(err){
+					if(err){
+						console.log(err);
+						res.status(400)
+						   .json({err:err});
+					}
+					else{
+						console.log('user added');
+						res.json('user added');
+					}
+		        	// models.User.create(__user) - postgres doesn't have use
+		        	// .then(function(user){
+		        	// user.password ='';
+		        	// res.json({user:user,msg:'Account Created'});
+		        })
+	        } else {
+	        	console.log(err)
+	        }
+	    });
+	});
+});
+
+app.post('/authenticate',function(req,res){
+	console.log('Authentication Endpoint');
+	var __user = req.body;
+
+	User.find({email:__user.email}, function(err, user) {
+		if (err) {
+			res.status(403)
+		    .json({err:'unauhthorized'});
+		} else {
+			user.password = '';
+		    	delete user.password;
+		    	var user_obj = {email:user.email};
+				var token = jwt.sign(user_obj,'brainstationkey');
+
+				res.set('authentication',token);
+		    	res.json(user_obj)
+		}
+	})
+})
+
+
+
+
+
+
+
+
+
+
