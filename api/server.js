@@ -3,6 +3,11 @@ var express = require('express');
 var app = express();
 var scrape = require('./scrape')
 
+// var models 	= require('./../models');
+// var bcrypt	= require('bcryptjs');
+// var jwt		= require('jsonwebtoken');
+// var router 	= require('express').Router();
+
 //mongoose
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/data/db/');
@@ -108,9 +113,40 @@ app.get('/deleteAll',function(req,res) {
 	   console.log('collection removed') 
 	   res.send('collection removed')
 	});
-})
+});
 
-console.log(scrape)
-scrape();
+FreshBooksData = scrape();
 
-   
+
+
+// app.post('/addUser',function(req,res){
+// 	console.log('Registration Endpoint');
+// 	var __user = req.body;
+
+// 	/*
+// 	The Bcrypt library takes the user password entered in the
+// 	registration form and encrypts it with a salt that is 
+// 	randomly generated through 10 rounds of roundomization
+// 	*/
+// 	bcrypt.genSalt(10, function(err, salt) {
+// 	    bcrypt.hash(__user.password, salt, function(err, hash) {
+// 	        // Store hash in your password DB.
+// 	        if(!err){
+// 	        	/*
+// 	        	the resulting hash produced contains an encrypted
+// 	        	password and some information on how to decode the
+// 	        	password that only bcrypt knows.
+// 	        	*/
+// 	        	__user.password = hash;
+// 		        	models.Users.create(__user)
+// 		        	.then(function(user){
+// 		        	//remove password from response
+
+// 		        	user.password ='';
+// 		        	res.json({user:user,msg:'Account Created'});
+// 		        })
+
+// 	        }
+// 	    });
+// 	});
+// });

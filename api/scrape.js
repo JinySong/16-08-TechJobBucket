@@ -1,5 +1,7 @@
 var request = require('request');
 var cheerio = require('cheerio');
+var Job = require('./models/Job');
+
 function Job(Title, Company, Logo, Location, ComDes, ResSum, ResLi, ReqSum, Reqli, CompenSum,CompenLi, Website, PostLink, DatePosted, DateExpiry,ApplyLink,ContactName,ContactEmail,ContactPhone,ContactPosition,Type,NotExpired) {
     this.Title = Title;
     this.Company = Company;
@@ -27,7 +29,7 @@ function Job(Title, Company, Logo, Location, ComDes, ResSum, ResLi, ReqSum, Reql
 var jobs = [];
 
 
-function returnData() {
+module.exports = function () {
 request('https://www.freshbooks.com/careers', function(err,res,body) {
   if(!err) {
     var count = 0;
@@ -61,6 +63,30 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
 
               //console.log(newJob)
               jobs.push(newJob)
+
+              //add to DB
+              Job.find({Title: newJob.Title, Company: newJob.Company}, function(err, user) {
+                console.log(user)
+                if(err) {
+                  console.log(err)
+                } else if (user.length==0) {
+                  console.log('no user');
+                  Job(newJob).save(function(err){
+                    if(err){
+                      console.log(err);
+                    }
+                    else{
+                      console.log('job added');
+
+                    }
+                  })
+                } else {
+                  console.log('record exists');
+                }
+              })  
+
+
+
               //console.log(!!jobs[n])
               //console.log(jobs)
               var done = true;
@@ -75,6 +101,7 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
                 console.log('done');
                 console.log(jobs);
                 return jobs;
+
                 
               } else {
                 console.log(n);
@@ -93,7 +120,8 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
 });
 }
 
-// returnData();
-module.exports = returnData;
+
+//put an endpoint to trigger scrape
+//set timeout to scrape every day
 
 //function shouldn't be surrounded by anything unless it's a method of the controller. it should be a code block
