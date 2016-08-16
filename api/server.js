@@ -9,6 +9,7 @@ var bcrypt	= require('bcrypt');
 var jwt		= require('jsonwebtoken');
 var router 	= require('express').Router();
 
+
 //mongoose
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/data/db/');
