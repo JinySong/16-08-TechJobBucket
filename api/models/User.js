@@ -27,10 +27,10 @@ UserSchema.pre('save', function(next) {
 	next();
 });
 
-UserSchema.methods.summary = function() {
-    var summary = this.name + "\n" + this.email + "\nRating: " + this.address; 
-    return summary;
-};
+// UserSchema.methods.summary = function() {
+//     var summary = this.name + "\n" + this.email + "\nRating: " + this.address; 
+//     return summary;
+// };
 
 var User = mongoose.model('User', UserSchema);
 module.exports = User;

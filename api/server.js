@@ -108,16 +108,54 @@ app.get('/JobDB',function(req,res){
 });
 
 
-app.get('/deleteAll',function(req,res) {
+app.get('/deleteAllJob',function(req,res) {
 	Job.remove({}, function(err) { 
 	   console.log('collection removed') 
 	   res.send('collection removed')
 	});
 });
 
+
 FreshBooksData = scrape();
 
+var newUser = {
+	email: 'hello@hi.com',
+	password: 'asdf'
+}
 
+
+app.get('/addUser',function(req,res){
+	User(newUser).save(function(err){
+		if(err){
+			console.log(err);
+			res.status(400)
+			   .json({err:err});
+		}
+		else{
+			console.log('user added');
+			res.json(req.body);
+		}
+	})
+});
+
+app.get('/userDB',function(req,res){
+	User.find({}, function(err, x) {
+	    if (err) {
+	        console.log(err);
+	        res.status(400)
+	           .json({err:err});
+	    } else {
+	        res.json(x);
+	    }
+	});
+});
+
+app.get('/deleteAllUser',function(req,res) {
+	User.remove({}, function(err) { 
+	   console.log('collection removed') 
+	   res.send('collection removed')
+	});
+});
 
 // app.post('/addUser',function(req,res){
 // 	console.log('Registration Endpoint');
