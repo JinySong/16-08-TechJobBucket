@@ -1,10 +1,12 @@
 var jwt = require('jsonwebtoken');
 
 module.exports = function(req, res, next) {
+
+    console.log('req',req)
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.param('token') || req.headers['authentication'];
     // decode token
-    console.log(token)
+    console.log('token', token)
     if (token) {
         // verifies secret and checks exp
         jwt.verify(token, 'brainstationkey', function(err, decoded) {          
@@ -13,6 +15,7 @@ module.exports = function(req, res, next) {
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;  
+                console.log('req',req.decoded.email)
                 /*
                 Next is a function built into NODE, it will tell node to go 
                 onto the next logical step. In this case it will be the user
