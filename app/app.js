@@ -20,7 +20,20 @@
 	            })
 	            .when('/user/:Id', {
 	              templateUrl: 'user.html',
-	              controller: 'UserCtrl as ctrl'
+	              controller: 'UserCtrl as ctrl',
+	              resolve:{
+					user:function($location, $q,$timeout){
+						console.log('user resolve')
+						if(!localStorage.authToken){
+								console.log('redirect')
+								$timeout(function(){
+									$location.path('/registerLogin')
+								},0)
+								return $q.reject;
+							}
+						}
+						
+					}
 	            })
 	            .when('/registerLogin', {
 	              templateUrl: 'registerLogin.html',
@@ -33,17 +46,17 @@
 	    $httpProvider.interceptors.push(function(jwtHelper){
 				return{
 					request:function(config){
-						console.log('Requests');
-						console.log(config);
+						// console.log('Requests');
+						// console.log(config);
 						if(localStorage.authToken != undefined){
 							config.headers.authentication = localStorage.authToken;
 						}
 						return config;
 					},
 					response:function(response){
-						console.log('Response');
+						//console.log('Response');
 						var auth_token = response.headers('authentication');
-						console.log(auth_token);
+						//console.log(auth_token);
 						if(auth_token){
 							var decrypt_token = jwtHelper.decodeToken(auth_token);
 							console.log(decrypt_token);

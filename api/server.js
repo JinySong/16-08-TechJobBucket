@@ -8,6 +8,7 @@ var bodyParser = require('body-parser')
 var bcrypt	= require('bcrypt');
 var jwt		= require('jsonwebtoken');
 var router 	= require('express').Router();
+var authentication = require('./middleware/auth')
 
 
 //mongoose
@@ -124,47 +125,22 @@ app.get('/deleteAllJob',function(req,res) {
 
 FreshBooksData = scrape();
 
-var newUser = {
-	email: 'hello@hi.com',
-	password: 'asdf'
-}
-
-//use auth.js in middleware instead for encryption
-app.get('/addUser',function(req,res){
-	User(newUser).save(function(err){
-		if(err){
-			console.log(err);
-			res.status(400)
-			   .json({err:err});
-		}
-		else{
-			console.log('user added');
-			res.json(req.body);
-		}
-	})
-});
+// //use auth.js in middleware instead for encryption
+// app.get('/addUser',function(req,res){
+// 	User(newUser).save(function(err){
+// 		if(err){
+// 			console.log(err);
+// 			res.status(400)
+// 			   .json({err:err});
+// 		}
+// 		else{
+// 			console.log('user added');
+// 			res.json(req.body);
+// 		}
+// 	})
+// });
 
 app.get('/userDB',function(req,res){
-	User.find({Email: req.Title}, function(err, x) {
-	    if (err) {
-	        console.log(err);
-	        res.status(400)
-	           .json({err:err});
-	    } else {
-	        res.json(x);
-	    }
-	});
-});
-
-app.get('/deleteAllUser',function(req,res) {
-	User.remove({}, function(err) { 
-	   console.log('collection removed') 
-	   res.send('collection removed')
-	});
-});
-
-
-app.get('/userByE', function(req,res) {
 	User.find({}, function(err, x) {
 	    if (err) {
 	        console.log(err);
@@ -174,10 +150,51 @@ app.get('/userByE', function(req,res) {
 	        res.json(x);
 	    }
 	});
-})
+});
 
 
-app.post('/addUser',function(req,res){
+app.get('/deleteAllUser',function(req,res) {
+	User.remove({}, function(err) { 
+	   console.log('collection removed') 
+	   res.send('collection removed')
+	});
+});
+
+
+
+app.put('/saveJob/:Id',function(req,res){
+	var user;
+	User.findOne({email:req.params.Id}, function(err, x) {
+	    if (err) {
+	        console.log(err);
+	        res.status(400)
+	           .json({err:err});
+	    } else {
+	        res.json(x);
+	        user = x;
+
+	        user.jobSaved.push(Id)
+
+			User.update({"_id":req.params.objectId},user,{},function(err,object){
+				if(err){
+					console.log(err);
+					res.status(400)
+					   .json({err:err})
+				}
+				else{
+					res.json(object);
+				}
+			});
+
+
+	    }
+	});
+
+	
+
+});
+
+app.post('/addUser', function(req,res){
 	console.log('Registration Endpoint');
 	var __user = req.body;
 	console.log(__user)
@@ -194,7 +211,13 @@ app.post('/addUser',function(req,res){
 					}
 					else{
 						console.log('user added');
-						res.json('user added');
+						// res.json('user added');
+						
+						//set authToken in User
+						var token = jwt.sign(__user, salt);
+						res.set('authentication', token);
+						
+						res.json({msg:'Account Created'});
 					}
 		        	// models.User.create(__user) - postgres doesn't have use
 		        	// .then(function(user){
@@ -208,31 +231,59 @@ app.post('/addUser',function(req,res){
 	});
 });
 
-app.post('/authenticate',function(req,res){
+
+app.post('/authenticate', function(req,res){
 	console.log('Authentication Endpoint');
 	var __user = req.body;
-
 	User.find({email:__user.email}, function(err, user) {
+
 		if (err) {
+			console.log(err)
 			res.status(403)
 		    .json({err:'unauhthorized'});
 		} else {
-			user.password = '';
-		    	delete user.password;
-		    	var user_obj = {email:user.email};
-				var token = jwt.sign(user_obj,'brainstationkey');
+			console.log(__user.password)
+			console.log(user[0])
+			console.log(user[0].password)
+			bcrypt.compare(__user.password, user[0].password, function(err, result) {
+			    // res == true 
+			    if(result==true){
+			    	user.password = '';
+			    	delete user.password;
+			    	var user_obj = {email:user[0].email};
+					var token = jwt.sign(user_obj,'brainstationkey');
 
-				res.set('authentication',token);
-		    	res.json(user_obj)
+					res.set('authentication',token);
+			    	res.json(user_obj)
+			    }
+			    else{
+			    	console.log('password does not match')
+			    	res.status(403)
+			    		.json({err:'unauhthorized'});
+			    }
+			});
 		}
 	})
 })
 
 
-
-
-
-
+//eg. http://localhost:8081/getUser/asdf@asdf.com
+app.use('/getUser/:Id', authentication, function(req,res) {
+	//req.decoded.email is from auth middleware, id is the email in the url. If they match, then the user have access
+	if (req.params.Id == req.decoded.email) {
+		User.findOne({email:req.params.Id}, function(err, x) {
+		    if (err) {
+		        console.log(err);
+		        res.status(400)
+		           .json({err:err});
+		    } else {
+		        res.json(x);
+		    }
+		});
+	} else {
+		res.send('wrong user')
+	}
+})
 
 
 
