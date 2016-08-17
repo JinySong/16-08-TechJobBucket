@@ -4,6 +4,7 @@ module.exports = function(req, res, next) {
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.param('token') || req.headers['authentication'];
     // decode token
+    console.log(token)
     if (token) {
         // verifies secret and checks exp
         jwt.verify(token, 'brainstationkey', function(err, decoded) {          
