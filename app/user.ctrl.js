@@ -10,6 +10,7 @@
 	  	//userVm.getUserJobs = getUserJobs;
 	  	userVm.getUser = getUser;
 		userVm.goHome = goHome;
+		userVm.logOut = logOut;
 
 		getUser(userVm.email);
 		function getUser(email){
@@ -39,8 +40,10 @@
 		}
 
 		function logOut() {
+			console.log(localStorage.authToken)
+			console.log('removing')
 			localStorage.removeItem('authToken');
-			console.log(authToken);
+			console.log(!!localStorage.authToken);
 			$location.path('/home');
 		}
 	});
