@@ -1,8 +1,53 @@
 <h1>User Page</h1>
 
+<div class="row">
+	<div ng-repeat='job in ctrl.userJobs' class="listing-border col-lg-3 col-md-4 col-sm-6 col-xs-12">
+	    <div class="hovereffect listing-box">
+	        <img class="img-responsive" ng-src="{{job.Logo}}" alt="">
+	            <div class="overlay">
+	                <h2>{{job.Title}}</h2>
+					<p> 
+						<a href="#">LINK HERE</a>
+					</p> 
+	            </div>
+	    </div>
+	</div>
+</div>
+
+
 <p>user: {{ctrl.user}}</p>
 
 <p>email : {{ctrl.email}}</p>
+
+<p>jobs: {{ctrl.userJobs}}</p>
+
+
+
+
+<!-- <div class="media hvr-float" 
+    ng-repeat="job in ctrl.userJobs = (ctrl.jobs|
+      filter: {Title:ctrl.search} | 
+      orderBy: ctrl.sortSelect.sortField : ctrl.sortSelect.reverse)"
+    ng-click="ctrl.goToJob(job._id)">
+    
+    <div class="media-left"><img class="media-object" ng-src="{{job.Logo}}"></div>
+    
+    <div class="media-body">
+      <h4 class="media-heading">
+        {{job.Title}}
+      </h4>
+      <div>
+        {{job.ComDes | limitTo: 250 }}{{job.CompanyInfo.length > 250 ? '...' : ''}}
+      </div>
+      <div>
+        <ul>
+          <li ng-repeat='responsibilty in job.Responsibilities | limitTo: 3'>{{responsibilty}}</li>
+        </ul>
+      </div>
+      <button class="btn btn-default pull-right" ng-click='ctrl.saveJob(job._id); $event.stopPropagation()'>Save Listing</button>
+      <button class="btn btn-default pull-right" ng-click='ctrl.goToApply(job._id); $event.stopPropagation()'>Quick Apply</button>
+    </div>
+  </div> -->
 
 
 <button ng-click='ctrl.goHome()'>See all Jobs</button>

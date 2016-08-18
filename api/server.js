@@ -114,7 +114,17 @@ app.get('/JobDB',function(req,res){
 	});
 });
 
-
+app.get('/Job/:Id',function(req,res){
+	Job.find({_id: req.params.Id}, function(err, x) {
+	    if (err) {
+	        console.log(err);
+	        res.status(400)
+	           .json({err:err});
+	    } else {
+	        res.json(x[0]);
+	    }
+	});
+});
 app.get('/deleteAllJob',function(req,res) {
 	Job.remove({}, function(err) { 
 	   console.log('collection removed') 
