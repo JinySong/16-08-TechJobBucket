@@ -9,7 +9,6 @@
 		RegLogVm.auth_btn = "Log In";
 		RegLogVm.register = register;
 		RegLogVm.authenticate = authenticate;
-		RegLogVm.msg;
 
 		function register(){
 			console.log('how many times this will run')
@@ -22,10 +21,7 @@
 				user = JSON.stringify(user);
 				$http.post('/addUser',user)
 				.then(function(res){
-					console.log('registered please log in');
-					RegLogVm.register_btn = res.data.msg;
-					//$location.path('/registerLogin')
-					RegLogVm.msg;
+					authenticate();
 				})
 			}
 			else{
