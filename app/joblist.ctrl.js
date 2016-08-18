@@ -17,6 +17,12 @@
 		joblVm.goToSignUp = goToSignUp;
 		joblVm.goToApply = goToApply;
 		joblVm.saveJob = saveJob;
+		joblVm.goToAcc = goToAcc;
+		joblVm.logOut = logOut;
+		joblVm.localStorage = !!localStorage.authToken
+
+		// $scope.$watch(joblVm.localStorage, function () {
+		// })
 		
 	  	function goToJob(id){
 	  		$location.path('/job/'+id)
@@ -26,6 +32,18 @@
 	  		console.log('hi')
 	  		$location.path('/registerLogin')
 	  	}
+
+	  	function goToAcc() {
+	  		$location.path('user/'+localStorage.loginEmail)
+	  	}
+
+	  	function logOut() {
+			console.log(localStorage.authToken)
+			console.log('removing')
+			localStorage.removeItem('authToken');
+			console.log(!!localStorage.authToken);
+			$location.path('/');
+		}
 
 	  	function goToApply(id){
 	  		for (var i=0; i<joblVm.jobs.length; i++) {

@@ -210,14 +210,17 @@ app.post('/addUser', function(req,res){
 						   .json({err:err});
 					}
 					else{
+						console.log(__user)
+						//localStorage.loginEmail = __user.email
+
 						console.log('user added');
 						// res.json('user added');
 						
 						//set authToken in User
 						var token = jwt.sign(__user, salt);
 						res.set('authentication', token);
-						
-						res.json({msg:'Account Created'});
+					 
+						res.json({msg:'Account Created, please log in!'});
 					}
 		        	// models.User.create(__user) - postgres doesn't have use
 		        	// .then(function(user){
