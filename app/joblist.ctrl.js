@@ -16,8 +16,8 @@
 		joblVm.goToJob = goToJob;
 		joblVm.goToSignUp = goToSignUp;
 		joblVm.goToApply = goToApply;
-		//joblVm.saveLink = saveLink;
-
+		joblVm.saveJob = saveJob;
+		
 	  	function goToJob(id){
 	  		$location.path('/job/'+id)
 	  	}
@@ -35,13 +35,16 @@
 	  		}
 		}
 
-	  	function saveLink(Id) {
-	  		var email = localStorage.loginEmail;
-	  		return $http.update('/saveJob/' + email).then(function(res) {
-	            self.jobs = res.data;
-	          }, function(err) {
-	            console.log(err)
-	          })
+	  	function saveJob(Id) {
+	  		return localStorage.loginEmail;
+
+
+	  		
+	  		// return $http.update('/saveJob/' + email).then(function(res) {
+	    //         self.jobs = res.data;
+	    //       }, function(err) {
+	    //         console.log(err)
+	    //       })
 	  	}
 
 

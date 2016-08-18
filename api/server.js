@@ -286,5 +286,29 @@ app.use('/getUser/:Id', authentication, function(req,res) {
 })
 
 
+app.get('/saveLink/:Email/:JobId',function(req,res) {
+	User.find({email:req.params.Email}, function(err, x) {
+	    if (err) {
+	        console.log(err);
+	        res.status(400)
+	           .json({err:err});
+	    } else {
+	        res.json(x);
+	        console.log(x[0].jobSaved)
+	        x[0].jobSaved.push(req.params.JobId);
+	        User.update({email:req.params.Email},x[0],{},function(err,y){
+		        if(err){
+		            console.log(err);
+		        }
+		        else{
+		            console.log(y);
+		        }
+    		});
+
+	    }
+	});
+
+	
+});
 
 
