@@ -4,23 +4,35 @@
 		.controller('UserCtrl', function ($http,jobSrv,$routeParams,$location) {
 		var userVm = this;
 
-	  	userVm.user ='';
 	  	userVm.email = $routeParams.Id
+	  	userVm.user ='';
+	  	userVm.userJobs = [];
+	  	//userVm.getUserJobs = getUserJobs;
 	  	userVm.getUser = getUser;
 		userVm.goHome = goHome;
 
+		getUser(userVm.email);
 		function getUser(email){
 			//pass through email to getUser endpoint. Make sure email is passed through when this function is called
 			return $http.get('/getUser/'+email).then(function(res) {
             userVm.user = res.data;
+            userVm.userJobs = res.data.jobSaved;
             console.log(res.data)
           }, function(err) {
             console.log(err)
             //$location.path('/home')
           })
 		}
-		//login email matches the encrypted authToken's email
-		getUser(userVm.email);
+		
+		// function getUserJobs(){
+		// 	for (x in userVm.user.jobSaved) {
+		// 		$http.get('/saveLink/'+localStorage.loginEmail+'/'+JobId).then(function(res) {
+		//             console.log('Job Saved to User')
+		//         }, function(err) {
+		//             console.log('Job did not save to user: ', err)
+		//         })
+		// 	}
+		// }
 
 		function goHome(){
 			$location.path('/home')

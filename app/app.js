@@ -22,9 +22,11 @@
 	              templateUrl: 'user.html',
 	              controller: 'UserCtrl as ctrl',
 	              resolve:{
-					user:function($location, $q,$timeout){
+					user:function($location, $q,$timeout, $route){
 						console.log('user resolve')
-						if(!localStorage.authToken){
+						console.log(window.location.hash.split('/')[2])
+						console.log(localStorage.loginEmail)
+						if(!localStorage.authToken || localStorage.loginEmail != $route.current.params.Id){
 								console.log('redirect')
 								$timeout(function(){
 									$location.path('/registerLogin')

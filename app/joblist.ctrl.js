@@ -1,7 +1,7 @@
 (function(){
 	angular
 		.module('TJdb')
-		.controller('JobListCtrl', function (jobSrv, $location,$window) {
+		.controller('JobListCtrl', function (jobSrv, $location,$window,$http) {
 		var joblVm = this;
 
 	 	joblVm.jobs = jobSrv.getJobs();
@@ -34,17 +34,13 @@
 	  			}
 	  		}
 		}
-
-	  	function saveJob(Id) {
-	  		return localStorage.loginEmail;
-
-
-	  		
-	  		// return $http.update('/saveJob/' + email).then(function(res) {
-	    //         self.jobs = res.data;
-	    //       }, function(err) {
-	    //         console.log(err)
-	    //       })
+		//test this
+	  	function saveJob(jobId) {
+	  		return $http.get('/saveLink/'+localStorage.loginEmail+'/'+jobId).then(function(res) {
+	            console.log('Job Saved to User')
+	        }, function(err) {
+	            console.log('Job did not save to user: ', err)
+	        })
 	  	}
 
 

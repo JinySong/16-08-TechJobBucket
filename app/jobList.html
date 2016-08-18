@@ -59,12 +59,12 @@
           <li ng-repeat='responsibilty in job.Responsibilities | limitTo: 3'>{{responsibilty}}</li>
         </ul>
       </div>
-      <button class="btn btn-default pull-right" >Save Listing</button>
+      <button class="btn btn-default pull-right" ng-click='ctrl.saveJob(job._id); $event.stopPropagation()'>Save Listing</button>
       <button class="btn btn-default pull-right" ng-click='ctrl.goToApply(job._id); $event.stopPropagation()'>Quick Apply</button>
     </div>
   </div>
 
-<h1>>{{ctrl.saveJob()}}</h1>
+<!-- <h1>>{{ctrl.saveJob()}}</h1> -->
 <button ng-click='ctrl.saveJob("57b23b6402fd423b76fdb5b0")'>click</button>
   
   57b23b6402fd423b76fdb5b0

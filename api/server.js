@@ -242,9 +242,9 @@ app.post('/authenticate', function(req,res){
 			res.status(403)
 		    .json({err:'unauhthorized'});
 		} else {
-			console.log(__user.password)
-			console.log(user[0])
-			console.log(user[0].password)
+			// console.log(__user.password)
+			// console.log(user[0])
+			// console.log(user[0].password)
 			bcrypt.compare(__user.password, user[0].password, function(err, result) {
 			    // res == true 
 			    if(result==true){
