@@ -1,7 +1,6 @@
 var express = require('express');
 //var models = require('./models');
 var app = express();
-var scrapeFreshBooks = require('./scrape/FreshBooks')
 var bodyParser = require('body-parser')
 
 //var models 	= require('./models') //sequelize
@@ -34,6 +33,11 @@ app.use(bodyParser.urlencoded({extended:false}));
 		console.log('Stop Server With CTRL + C');
 	});
 //});
+
+var scrapeFreshBooks = require('./scrape/FreshBooks')
+FreshBooksData = scrapeFreshBooks();
+var scrapeShopify = require('./scrape/Shopify')
+ShopifyData = scrapeShopify();
 
 app.get('/', function(req, res) {
 	res.send('Express is running!');
@@ -133,7 +137,7 @@ app.get('/deleteAllJob',function(req,res) {
 });
 
 
-FreshBooksData = scrapeFreshBooks();
+
 
 // //use auth.js in middleware instead for encryption
 // app.get('/addUser',function(req,res){
@@ -259,9 +263,6 @@ app.post('/authenticate', function(req,res){
 			res.status(403)
 		    .json({err:'unauhthorized'});
 		} else {
-			console.log(__user.password)
-			console.log(user[0])
-			console.log(user[0].password)
 			bcrypt.compare(__user.password, user[0].password, function(err, result) {
 			    // res == true 
 			    if(result==true){

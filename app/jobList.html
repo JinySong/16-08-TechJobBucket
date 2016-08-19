@@ -1,7 +1,9 @@
-<div class="container">
+<!-- <div class="container-fluid"> -->
+
+<div class="background-image"></div>
 
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -14,17 +16,18 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div id='watch' class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <form class="navbar-form navbar-left">
         <div class="form-group">
-          <label for="search">Search</label>
+          <!-- <label for="search">Search</label> -->
           <input ng-model="ctrl.search" 
             type="text" 
             class="form-control" 
-            id="search">
+            id="search"
+            placeholder="Search">
         </div>
         <div class="form-group">
-          <label for="search">Sort</label>
+          <!-- <label for="search">Sort</label> -->
           <select class="form-control" 
             ng-options="sort as sort.label for sort in ctrl.sortOptions"
             ng-model='ctrl.sortSelect'
@@ -35,7 +38,7 @@
         <li ng-click='ctrl.goToSignUp()'><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</a></li>
         <li ng-click='ctrl.goToSignUp()'><a><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Log-In</a></li>
       </ul>
-      {{ctrl.localStorage}}
+
       <ul class="nav navbar-nav navbar-right" ng-show='ctrl.localStorage' >
         <li ng-click='ctrl.goToAcc()'><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Account</a></li>
         <li ng-click='ctrl.logOut()'><a><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Log-Out</a></li>
@@ -44,31 +47,38 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-  <div class="media hvr-float" 
-    ng-repeat="job in ctrl.filtered = (ctrl.jobs|
+
+<div class="jumbotron">
+  <div class="jumbo-content">
+    <h1 class="display-3">Tech Jobs!</h1>
+    <p class="lead">Lots and Lots of Them...All at your finger tips!</p>
+   
+      <a class="btn btn-default btn-lg" href="#" role="button">Learn more</a>
+    </p>
+  </div>
+</div>
+
+<div class="container">
+<div class="row">
+  <div ng-repeat="job in ctrl.filtered = (ctrl.jobs|
       filter: {Title:ctrl.search} | 
       orderBy: ctrl.sortSelect.sortField : ctrl.sortSelect.reverse)"
-    ng-click="ctrl.goToJob(job._id)">
-    
-    <div class="media-left"><img class="media-object" ng-src="{{job.Logo}}"></div>
-    
-    <div class="media-body">
-      <h4 class="media-heading">
-        {{job.Title}}
-      </h4>
-      <div>
-        {{job.ComDes | limitTo: 250 }}{{job.CompanyInfo.length > 250 ? '...' : ''}}
+    ng-click="ctrl.goToJob(job._id)" class="listing-border col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="hovereffect listing-box">
+          <img class="img-responsive" ng-src="{{job.Logo}}" alt="">
+              <div class="overlay">
+                  <h2>{{job.Title}}</h2>
+          <p> 
+            <a href="#" class="info" ng-click='ctrl.saveJob(job._id); $event.stopPropagation()'>Save</a>
+            <a href="#" class="info" ng-click='ctrl.goToApply(job._id); $event.stopPropagation()'>Apply</a>
+          </p> 
+              </div>
       </div>
-      <div>
-        <ul>
-          <li ng-repeat='responsibilty in job.Responsibilities | limitTo: 3'>{{responsibilty}}</li>
-        </ul>
-      </div>
-      <button class="btn btn-default pull-right" ng-click='ctrl.saveJob(job._id); $event.stopPropagation()'>Save Listing</button>
-      <button class="btn btn-default pull-right" ng-click='ctrl.goToApply(job._id); $event.stopPropagation()'>Quick Apply</button>
-    </div>
   </div>
+</div>
+
 
 
   <div class="text-center"><h3>You've reached the end of records</h3></div>
+</div>
 </div>

@@ -4,10 +4,10 @@ var Job = require('./../models/Job');
 
 function Job(Title, Company, Logo, Location, ComDes, ResSum, ResLi, ReqSum, Reqli, CompenSum,CompenLi, Website, PostLink, DatePosted, DateExpiry,ApplyLink,ContactName,ContactEmail,ContactPhone,ContactPosition,Type,NotExpired) {
     this.Title = Title;
-    this.Company = Company;
-    this.Logo= Logo;
+    this.Company = 'Shopify';
+    this.Logo= 'https://www.zoho.com/inventory/help/images/market-places/shopify-logo.png';
     this.Location= Location;
-    this.ComDes= ComDes;
+    this.ComDes= 'Over the next 10 years, the way retail works will change at a fundamental level. Every store will need an ecommerce website. Customers will expect options of where and how to buy: in-store or online, delivered or for pick-up. It’s an incredibly exciting time for this industry, and we’re going to be right at the centre of it. \nThe opportunity to shape how retail works all over the world is in our hands. We have a huge playground to work with, and we’ve already proven that we can move faster than anyone else. But right now we’re only part of the way there. To truly change the future of commerce, we need your help.';
     this.ResSum= ResSum;
     this.ResLi= ResLi;
     this.ReqSum= ReqSum;
@@ -28,90 +28,82 @@ function Job(Title, Company, Logo, Location, ComDes, ResSum, ResLi, ReqSum, Reql
 };
 var jobs = [];
 
-//module.exports =
-big();
- function big() {
-request('https://www.freshbooks.com/careers', function(err,res,body) {
-  if(!err) {
-    var count = 0;
+//
+module.exports =  function () {
+    request('https://www.shopify.com/careers', function(err,res,body) {
+      if (!err) {
+        var count =0;
+        cheerio.load(body)('#work-at-shopify div.page-width div.section-block.grid-container.grid-container--thirds').each(function(i,j) {
+          var length = cheerio.load(body)('a.body-link',this).length;
+          var a = cheerio.load(body)('a.body-link',this);
+          for (var i=0; i<length; i++) { //change to length
+            var links = 'https://www.shopify.com' + a[i].attribs.href
+              request(links, function(err,res,body) { //change to links
+                if(!err) {
+                  var newJob = new Job();
+                  newJob.Website = res.request.uri.href;
+                  newJob.Title = cheerio.load(body)('h1').text();
+                  newJob.Location = cheerio.load(body)('.career-description p.heading--4').text();
+                  newJob.ResSum = cheerio.load(body)('.career-description p:nth-child(4)').text() + '\n\n'+ cheerio.load(body)('.career-description p:nth-child(5)').text();
+                  newJob.ResLi = (cheerio.load(body)('.career-description ul:nth-of-type(1)').html() + cheerio.load(body)('.career-description ul:nth-of-type(2)').html() || '').replace(/<li>/g,'').replace(/(\r\n|\n|\r)/gm,'').replace(/<\/li>/g,'xxx').split('xxx');
+                  newJob.ApplyLink = cheerio.load(body)('p.career-actions__apply a.marketing-button').attr('href')
+                  newJob.Company = 'Shopify';
+                  newJob.Logo= 'https://www.zoho.com/inventory/help/images/market-places/shopify-logo.png';
+                  newJob.ComDes= 'Over the next 10 years, the way retail works will change at a fundamental level. Every store will need an ecommerce website. Customers will expect options of where and how to buy: in-store or online, delivered or for pick-up. It’s an incredibly exciting time for this industry, and we’re going to be right at the centre of it. \nThe opportunity to shape how retail works all over the world is in our hands. We have a huge playground to work with, and we’ve already proven that we can move faster than anyone else. But right now we’re only part of the way there. To truly change the future of commerce, we need your help.';
+    
+                  jobs.push(newJob)
+                  //console.log(newJob)
 
-    cheerio.load(body)('section.u-wrapper').each(function(i,j) {
-      if (i > 0) {
-        var links = cheerio.load(body)('h3 a', this);
-        for (var n = 0; n < links.length ; n++){
-          var link = 'https://www.freshbooks.com' + links[n].attribs.href
-            request(link, function(err,res,body) {
-            var newJob = new Job();
-            newJob.PostLink = res.request.uri.href;
-            if (!err) {
-              newJob.Title = cheerio.load(body)('h1').text();
-              var p = (cheerio.load(body)('.job-description.u-text-wrap p:nth-child(1)').text().length>100) ? 3 : 2; 
-              newJob.ResSum = cheerio.load(body)('.job-description.u-text-wrap p:nth-child('+p+')').text();
-              newJob.ResLi = (cheerio.load(body)('.job-description.u-text-wrap ul').html()).replace(/<li>/g,'').replace(/(\r\n|\n|\r)/gm,'').replace(/<\/li>/g,'xxx').split('xxx');
-              newJob.ReqLi = (cheerio.load(body)('.job-description.u-text-wrap ul:nth-of-type(2)').html()).replace(/<li>/g,'').replace(/(\r\n|\n|\r)/gm,'').replace(/<\/li>/g,'xxx').split('xxx');
-              newJob.ApplyLink = cheerio.load(body)('div.u-text-center a.button-primary.u-text-center').attr("href").split('</li>')[0];
+                  //add to DB
+                  Job.find({Title: newJob.Title, Company: newJob.Company}, function(err, user) {
+                    console.log(user)
+                    if(err) {
+                      console.log(err)
+                    } else if (user.length==0) {
+                      console.log('no user');
+                      Job(newJob).save(function(err){
+                        if(err){
+                          console.log(err);
+                        }
+                        else{
+                          //console.log('job added');
 
-              newJob.ComDes = 'FreshBooks has a big vision. We launched in 2003 but we’re just getting started and there’s a lot left to do. We\'re a high performing team working towards a common goal: building a kick-ass online accounting application to help small businesses better manage their finances. Known for extraordinary customer service and based in Toronto, Canada, FreshBooks serves paying customers in over 120 countries. \n We\'re an ambitious bunch, with our eyes laser-focused on shipping extraordinary experiences to small business owners.  You\'ll be surrounded by talented team members who share a common vision for what an amazing software company could be, and have the opportunity to help shape how we build a world-class company right here in downtown Toronto.  '
-              newJob.Company = 'freshbooks';
-              newJob.Logo = 'https://www.freshbooks.com/_themes/freshbooks/img/responsive/header/freshbooks-logo-rgb.png';
-              newJob.Location = 'Toronto, ON';
-              newJob.Website = 'https://www.freshbooks.com'
+                        }
+                      })
+                    } else {
+                      console.log('record exists');
+                    }
+                  })  
 
-              console.log(newJob)
-              jobs.push(newJob)
+                  var done = true;
 
-              //add to DB
-              // Job.find({Title: newJob.Title, Company: newJob.Company}, function(err, user) {
-              //   console.log(user)
-              //   if(err) {
-              //     console.log(err)
-              //   } else if (user.length==0) {
-              //     console.log('no user');
-              //     Job(newJob).save(function(err){
-              //       if(err){
-              //         console.log(err);
-              //       }
-              //       else{
-              //         console.log('job added');
-
-              //       }
-              //     })
-              //   } else {
-              //     console.log('record exists');
-              //   }
-              // })  
+                  for (var j=0; j<i; j++){
+                    if (!!jobs[j]==!1) {
+                      done =false;
+                    }
+                  }
+                  if (done) {
+                    console.log('Shopify done');
+                    //console.log(jobs);
+                    return jobs; 
+                  }
 
 
 
-              //console.log(!!jobs[n])
-              //console.log(jobs)
-              var done = true;
-
-              for (var i=0; i<n; i++){
-                if (!!jobs[i]==!1) {
-                  done =false;
+                } else {
+                  //console.log(err)
                 }
-              }
-
-              if (done) {
-                console.log('done');
-                console.log(jobs);
-                return jobs;
-
                 
-              } else {
-                console.log(n);
-              }
-            } else {
-              console.log(err)
-            }
-          })
-        }
+              })
+
+            
+          }
+        })
+          
+        
+      } else {
+        //console.log(err)
       }
-       
-    })
-  } else {
-    console.log(err);
-  };
-});
-}
+      
+    });
+  }
