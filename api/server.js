@@ -1,7 +1,7 @@
 var express = require('express');
 //var models = require('./models');
 var app = express();
-var scrape = require('./scrape')
+var scrapeFreshBooks = require('./scrape/FreshBooks')
 var bodyParser = require('body-parser')
 
 //var models 	= require('./models') //sequelize
@@ -133,7 +133,7 @@ app.get('/deleteAllJob',function(req,res) {
 });
 
 
-FreshBooksData = scrape();
+FreshBooksData = scrapeFreshBooks();
 
 // //use auth.js in middleware instead for encryption
 // app.get('/addUser',function(req,res){
@@ -254,10 +254,14 @@ app.post('/authenticate', function(req,res){
 			console.log(err)
 			res.status(403)
 		    .json({err:'unauhthorized'});
+		} else if (!user[0].password) {
+			console.log(err)
+			res.status(403)
+		    .json({err:'unauhthorized'});
 		} else {
-			// console.log(__user.password)
-			// console.log(user[0])
-			// console.log(user[0].password)
+			console.log(__user.password)
+			console.log(user[0])
+			console.log(user[0].password)
 			bcrypt.compare(__user.password, user[0].password, function(err, result) {
 			    // res == true 
 			    if(result==true){

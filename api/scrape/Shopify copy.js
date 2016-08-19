@@ -1,6 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
-var Job = require('./models/Job');
+var Job = require('./../models/Job');
 
 function Job(Title, Company, Logo, Location, ComDes, ResSum, ResLi, ReqSum, Reqli, CompenSum,CompenLi, Website, PostLink, DatePosted, DateExpiry,ApplyLink,ContactName,ContactEmail,ContactPhone,ContactPosition,Type,NotExpired) {
     this.Title = Title;
@@ -28,8 +28,9 @@ function Job(Title, Company, Logo, Location, ComDes, ResSum, ResLi, ReqSum, Reql
 };
 var jobs = [];
 
-
-module.exports = function () {
+//module.exports =
+big();
+ function big() {
 request('https://www.freshbooks.com/careers', function(err,res,body) {
   if(!err) {
     var count = 0;
@@ -38,13 +39,8 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
       if (i > 0) {
         var links = cheerio.load(body)('h3 a', this);
         for (var n = 0; n < links.length ; n++){
-          // var newJob = new Job();
           var link = 'https://www.freshbooks.com' + links[n].attribs.href
-          // newJob.PostLink = link;
-          // console.log(newJob.PostLink);
-          //looping thru lengh, for a single loop sending a request; but request is async meaning the callback even for the request will run after all the loop has finished. Callback has to wait until the loop has to finish.
-           request(link, function(err,res,body) {
-            // console.log(res.request.uri.href);
+            request(link, function(err,res,body) {
             var newJob = new Job();
             newJob.PostLink = res.request.uri.href;
             if (!err) {
@@ -61,29 +57,29 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
               newJob.Location = 'Toronto, ON';
               newJob.Website = 'https://www.freshbooks.com'
 
-              //console.log(newJob)
+              console.log(newJob)
               jobs.push(newJob)
 
               //add to DB
-              Job.find({Title: newJob.Title, Company: newJob.Company}, function(err, user) {
-                console.log(user)
-                if(err) {
-                  console.log(err)
-                } else if (user.length==0) {
-                  console.log('no user');
-                  Job(newJob).save(function(err){
-                    if(err){
-                      console.log(err);
-                    }
-                    else{
-                      console.log('job added');
+              // Job.find({Title: newJob.Title, Company: newJob.Company}, function(err, user) {
+              //   console.log(user)
+              //   if(err) {
+              //     console.log(err)
+              //   } else if (user.length==0) {
+              //     console.log('no user');
+              //     Job(newJob).save(function(err){
+              //       if(err){
+              //         console.log(err);
+              //       }
+              //       else{
+              //         console.log('job added');
 
-                    }
-                  })
-                } else {
-                  console.log('record exists');
-                }
-              })  
+              //       }
+              //     })
+              //   } else {
+              //     console.log('record exists');
+              //   }
+              // })  
 
 
 
@@ -119,9 +115,3 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
   };
 });
 }
-
-
-//put an endpoint to trigger scrape
-//set timeout to scrape every day
-
-//function shouldn't be surrounded by anything unless it's a method of the controller. it should be a code block

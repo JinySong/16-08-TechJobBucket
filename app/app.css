@@ -31,8 +31,8 @@
   top: 0;
   left: 0;
   background-color: rgba(75,75,75,0);
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .hovereffect:hover .overlay {
@@ -62,18 +62,19 @@
 
 .hovereffect h2 {
   text-transform: uppercase;
+  height: 60px;
   color: #fff;
   text-align: center;
   position: relative;
   font-size: 17px;
-  padding: 10px; 
+  padding: 14px; 
   margin: 0;
   background: rgba(0, 0, 0, 0.6);
   -webkit-transform: translateY(139px);
   -ms-transform: translateY(139px);
   transform: translateY(139px);
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .hovereffect:hover h2 {
@@ -98,8 +99,8 @@
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   font-weight: normal;
-  margin: -52px 0 0 0;
-  padding: 62px 100px;
+  margin:  0;
+  padding: 0 22px;
 }
 
 .hovereffect:hover a.info {
@@ -113,3 +114,6 @@
 .hovereffect a.info:hover {
   box-shadow: 0 0 5px #fff;
 }
+
+
+
