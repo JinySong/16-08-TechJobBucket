@@ -34,10 +34,10 @@ app.use(bodyParser.urlencoded({extended:false}));
 	});
 //});
 
-var scrapeFreshBooks = require('./scrape/FreshBooks')
-FreshBooksData = scrapeFreshBooks();
-var scrapeShopify = require('./scrape/Shopify')
-ShopifyData = scrapeShopify();
+// var scrapeFreshBooks = require('./scrape/FreshBooks')
+// FreshBooksData = scrapeFreshBooks();
+// var scrapeShopify = require('./scrape/Shopify')
+// ShopifyData = scrapeShopify();
 
 app.get('/', function(req, res) {
 	res.send('Express is running!');
@@ -258,7 +258,7 @@ app.post('/authenticate', function(req,res){
 			console.log(err)
 			res.status(403)
 		    .json({err:'unauhthorized'});
-		} else if (!user[0].password) {
+		} else if (!user[0] || !user[0].password) {
 			console.log(err)
 			res.status(403)
 		    .json({err:'unauhthorized'});

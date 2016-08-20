@@ -1,11 +1,15 @@
+<div class="container">
 <h1>User Page</h1>
 
-<div class="media hvr-float" ng-repeat='job in ctrl.userJobs' ng-click="ctrl.goToJob(job._id)">
+<button ng-click='ctrl.goHome()'>See all Jobs</button>
+<button ng-click='ctrl.logOut()'>Log-out</button>
+
+<div class="media hvr-float row" ng-repeat='job in ctrl.userJobs' ng-click="ctrl.goToJob(job._id)">
     
-  <div class="media-left"><img class="media-object" ng-src="{{job.Logo}}"></div>
+  <div class="col-md-2"><img class="img-responsive" ng-src="{{job.Logo}}"></div>
     
-  <div class="media-body">
-    <h4 class="media-heading">{{job.Title}}</h4>
+  <div class="col-md-10">
+    <h4>{{job.Title}}</h4>
     <div>{{job.ComDes | limitTo: 250 }}{{job.CompanyInfo.length > 250 ? '...' : ''}}</div>
     <div>
       <ul>
@@ -18,14 +22,15 @@
   </div>
 
 </div>
+</div>
 
 
 
-<p>user: {{ctrl.user}}</p>
+<!-- <p>user: {{ctrl.user}}</p>
 
 <p>email : {{ctrl.email}}</p>
 
-<p>jobs: {{ctrl.userJobs}}</p>
+<p>jobs: {{ctrl.userJobs}}</p> -->
 
 
 
@@ -56,5 +61,3 @@
   </div> -->
 
 
-<button ng-click='ctrl.goHome()'>See all Jobs</button>
-<button ng-click='ctrl.logOut()'>Log-out</button>
