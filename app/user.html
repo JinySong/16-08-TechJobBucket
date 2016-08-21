@@ -15,49 +15,15 @@
   
   <div class="col-md-10">
     <div>
-      <button class="btn btn-default">Research: {{job.researched}}</button>
-      <button class="btn btn-default">Submit Resume: {{job.resumed}}</button>
-      <button class="btn btn-default">Send Application: {{job.applied}}</button>
-      <button class="btn btn-default">Getting the Interview: {{job.interviewed}}</button>
+      <button class="btn" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'>Research: {{job.researched}}</button>
+      <button class="btn btn-default" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'>Submit Resume: {{job.resumed}}</button>
+      <button class="btn btn-default" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'>Send Application: {{job.applied}}</button>
+      <button class="btn btn-default" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'>Getting the Interview: {{job.interviewed}}</button>
     </div>
     <div><textarea class="form-control" rows='3' placeholder="{{job.notes  || 'notes: '}}"></textarea></div>
-    <div><button class="btn btn-default">Save</button></div>
+    <div><button class="btn btn-default pull-right">Save Notes</button></div>
   </div>
     
       
 </div>
 </div>
-
-
-
-
-<!-- <p>jobSaved: {{ctrl.user.jobSaved[0].posting.Title}}</p> -->
-
-
-
-<!-- <div class="media hvr-float" 
-    ng-repeat="job in ctrl.userJobs = (ctrl.jobs|
-      filter: {Title:ctrl.search} | 
-      orderBy: ctrl.sortSelect.sortField : ctrl.sortSelect.reverse)"
-    ng-click="ctrl.goToJob(job._id)">
-    
-    <div class="media-left"><img class="media-object" ng-src="{{job.Logo}}"></div>
-    
-    <div class="media-body">
-      <h4 class="media-heading">
-        {{job.Title}}
-      </h4>
-      <div>
-        {{job.ComDes | limitTo: 250 }}{{job.CompanyInfo.length > 250 ? '...' : ''}}
-      </div>
-      <div>
-        <ul>
-          <li ng-repeat='responsibilty in job.Responsibilities | limitTo: 3'>{{responsibilty}}</li>
-        </ul>
-      </div>
-      <button class="btn btn-default pull-right" ng-click='ctrl.saveJob(job._id); $event.stopPropagation()'>Save Listing</button>
-      <button class="btn btn-default pull-right" ng-click='ctrl.goToApply(job._id); $event.stopPropagation()'>Quick Apply</button>
-    </div>
-  </div> -->
-
-
