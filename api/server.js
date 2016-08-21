@@ -345,17 +345,71 @@ app.get('/saveLink/:Email/:JobId',function(req,res) {
 				            console.log(y);
 				        }
 		    		});
-
 	        	}
 	        })
-
-
-	        
-
-	    }
+		}
 	});
-
-	
 });
+
+app.put('/editJob/:Email/:JobId',function(req,res) {
+	var jobUpdate = {
+        id: req.params.JobId,
+        researched: req.body.researched,
+        resumed: req.body.resumed,
+        applied: req.body.applied,
+        interviewed: req.body.interviewed,
+        posting: req.body.posting, //posting also has an _id
+        notes: req.body.notes
+	};
+	var userUpdate;
+	User.findOne({'email':req.params.Email}, function(err,user) {
+		if (!err) {
+			userUpdate = user;
+			for (var i=0; i<user.jobSaved.length; i++) {
+				if (user.jobSaved[i].id == req.params.JobId) {
+					userUpdate.jobSaved[i] = jobUpdate;
+
+					User.update({'email':req.params.Email},userUpdate,{},function(err,object){
+						if (!err) {
+							res.json(object)
+						} else {
+							console.log('cannot update user',err);
+							res.status(400).json({err:err})
+						}
+					})
+				}
+			}
+			//res.json(object);
+		} else {
+			console.log('cannot find user',err);
+			res.status(400).json({err:err})
+		}
+	})
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
