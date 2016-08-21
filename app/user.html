@@ -1,32 +1,30 @@
 <div class="container">
 <h1>User Page</h1>
 
-<button ng-click='ctrl.goHome()'>See all Jobs</button>
-<button ng-click='ctrl.logOut()'>Log-out</button>
+<button class="btn btn-default" ng-click='ctrl.goHome()'>See all Jobs</button>
+<button class="btn btn-default" ng-click='ctrl.logOut()'>Log-out</button>
 
 <hr>
 
-<div class="media row" ng-repeat='job in ctrl.user.jobSaved' ng-click="ctrl.goToJob(job._id)">
+<div class="media row" ng-repeat='job in ctrl.user.jobSaved'">
     
-  <div class="col-md-2">
+  <div class="col-md-2 hvr-float-shadow" ng-click="ctrl.goToJob(job.posting._id)">
     <img class="img-responsive" ng-src="{{job.posting.Logo}}">
     <h4>{{job.posting.Title}}</h4>
   </div>
+  
   <div class="col-md-10">
-    
     <div>
-      <button>Research Company: {{job.researched}}</button>
-      <button>Submit Resume: {{job.resumed}}</button>
-      <button>Send Application: {{job.applied}}</button>
-      <button>Getting the Interview: {{job.interviewed}}</button>
+      <button class="btn btn-default">Research: {{job.researched}}</button>
+      <button class="btn btn-default">Submit Resume: {{job.resumed}}</button>
+      <button class="btn btn-default">Send Application: {{job.applied}}</button>
+      <button class="btn btn-default">Getting the Interview: {{job.interviewed}}</button>
     </div>
     <div><textarea class="form-control" rows='3' placeholder="{{job.notes  || 'notes: '}}"></textarea></div>
-    <div><button>Save</button></div>
-    </div>
+    <div><button class="btn btn-default">Save</button></div>
+  </div>
     
       
-  </div>
-
 </div>
 </div>
 
