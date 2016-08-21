@@ -6,19 +6,25 @@
 
 <hr>
 
-<div class="media hvr-float row" ng-repeat='job in ctrl.user.jobSaved' ng-click="ctrl.goToJob(job._id)">
+<div class="media row" ng-repeat='job in ctrl.user.jobSaved' ng-click="ctrl.goToJob(job._id)">
     
-  <div class="col-md-2"><img class="img-responsive" ng-src="{{job.posting.Logo}}"></div>
-    
-  <div class="col-md-10">
+  <div class="col-md-2">
+    <img class="img-responsive" ng-src="{{job.posting.Logo}}">
     <h4>{{job.posting.Title}}</h4>
+  </div>
+  <div class="col-md-10">
+    
     <div>
       <button>Research Company: {{job.researched}}</button>
       <button>Submit Resume: {{job.resumed}}</button>
       <button>Send Application: {{job.applied}}</button>
       <button>Getting the Interview: {{job.interviewed}}</button>
     </div>
+    <div><textarea class="form-control" rows='3' placeholder="{{job.notes  || 'notes: '}}"></textarea></div>
+    <div><button>Save</button></div>
     </div>
+    
+      
   </div>
 
 </div>
@@ -27,7 +33,7 @@
 
 
 
-<p>jobSaved: {{ctrl.user.jobSaved[0].posting.Title}}</p>
+<!-- <p>jobSaved: {{ctrl.user.jobSaved[0].posting.Title}}</p> -->
 
 
 

@@ -19,16 +19,16 @@
 			//pass through email to getUser endpoint. Make sure email is passed through when this function is called
 			return $http.get('/getUser/'+email).then(function(res) {
             userVm.user = res.data;
-            for (x in userVm.user.jobSaved) {
-            	//console.log(userVm.user.jobSaved[x])
-				$http.get('/Job/'+ userVm.user.jobSaved[x].id).then(function(res) {
-					//console.log('hi',res.data)
-					userVm.user.jobSaved[x].posting = res.data
-		            console.log('Job Saved to User')
-		        }, function(err) {
-		            console.log('Job did not save to user: ', err)
-		        })
-			}
+   //          for (var i=0; i<userVm.user.jobSaved.length; i++) {
+   //          	//console.log(userVm.user.jobSaved[x])
+			// 	$http.get('/Job/'+ userVm.user.jobSaved[i].id).then(function(res) {
+			// 		console.log(i)
+			// 		userVm.user.jobSaved[i-1].posting = res.data
+		 //            console.log('Job Saved to User')
+		 //        }, function(err) {
+		 //            console.log('Job did not save to user: ', err)
+		 //        })
+			// }
             //userVm.userJobs = res.data.jobSaved;
           }, function(err) {
             console.log(err)

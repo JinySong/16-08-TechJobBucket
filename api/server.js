@@ -192,8 +192,11 @@ app.put('/saveJob/:Id',function(req,res){
 	        researched: false,
 	        resumed: false,
 	        applied: false,
-	        interviewed: false
+	        interviewed: false,
+	        posting: ''
 	        }
+
+	        //Job.findOne({_id:})
 
 	        //add: don't add duplicates
 	        user.jobSaved.push(newJob)
@@ -320,26 +323,34 @@ app.get('/saveLink/:Email/:JobId',function(req,res) {
 	        res.status(400)
 	           .json({err:err});
 	    } else {
-	        res.json(x);
-	        //console.log(x[0].jobSaved)
-	        var newJob = {
-	        id: req.params.JobId,
-	        researched: false,
-	        resumed: false,
-	        applied: false,
-	        interviewed: false,
-	        notes: ''
-	        }
+	        Job.find({_id:req.params.JobId}, function(err,z) {
+	        	if (!err) {
+	        		var newJob = {
+				        id: req.params.JobId,
+				        researched: false,
+				        resumed: false,
+				        applied: false,
+				        interviewed: false,
+				        posting: '',
+				        notes: ''
+				        }
+				    newJob.posting = z[0];
+	        		x[0].jobSaved.push(newJob);
+			        
+			        User.update({email:req.params.Email},x[0],{},function(err,y){
+				        if(err){
+				            console.log(err);
+				        }
+				        else{
+				            console.log(y);
+				        }
+		    		});
 
-	        x[0].jobSaved.push(newJob);
-	        User.update({email:req.params.Email},x[0],{},function(err,y){
-		        if(err){
-		            console.log(err);
-		        }
-		        else{
-		            console.log(y);
-		        }
-    		});
+	        	}
+	        })
+
+
+	        
 
 	    }
 	});
