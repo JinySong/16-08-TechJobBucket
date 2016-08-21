@@ -6,7 +6,7 @@
 
 	  	userVm.email = $routeParams.Id
 	  	userVm.user ='';
-	  	userVm.userJobs = [];
+	  	//userVm.userJobs = [];
 	  	//userVm.getUserJobs = getUserJobs;
 	  	userVm.getUser = getUser;
 	  	userVm.getUserJobs = getUserJobs;
@@ -20,10 +20,10 @@
 			return $http.get('/getUser/'+email).then(function(res) {
             userVm.user = res.data;
             for (x in userVm.user.jobSaved) {
-            	console.log(userVm.user.jobSaved[x])
-				$http.get('/Job/'+ userVm.user.jobSaved[x]).then(function(res) {
-					console.log('hi',res.data)
-					userVm.userJobs.push(res.data)
+            	//console.log(userVm.user.jobSaved[x])
+				$http.get('/Job/'+ userVm.user.jobSaved[x].id).then(function(res) {
+					//console.log('hi',res.data)
+					userVm.user.jobSaved[x].posting = res.data
 		            console.log('Job Saved to User')
 		        }, function(err) {
 		            console.log('Job did not save to user: ', err)

@@ -4,21 +4,21 @@
 <button ng-click='ctrl.goHome()'>See all Jobs</button>
 <button ng-click='ctrl.logOut()'>Log-out</button>
 
-<div class="media hvr-float row" ng-repeat='job in ctrl.userJobs' ng-click="ctrl.goToJob(job._id)">
+<hr>
+
+<div class="media hvr-float row" ng-repeat='job in ctrl.user.jobSaved' ng-click="ctrl.goToJob(job._id)">
     
-  <div class="col-md-2"><img class="img-responsive" ng-src="{{job.Logo}}"></div>
+  <div class="col-md-2"><img class="img-responsive" ng-src="{{job.posting.Logo}}"></div>
     
   <div class="col-md-10">
-    <h4>{{job.Title}}</h4>
-    <div>{{job.ComDes | limitTo: 250 }}{{job.CompanyInfo.length > 250 ? '...' : ''}}</div>
+    <h4>{{job.posting.Title}}</h4>
     <div>
-      <ul>
-        <li ng-repeat='responsibilty in job.Responsibilities | limitTo: 3'>{{responsibilty}}</li>
-      </ul>
+      <button>Research Company: {{job.researched}}</button>
+      <button>Submit Resume: {{job.resumed}}</button>
+      <button>Send Application: {{job.applied}}</button>
+      <button>Getting the Interview: {{job.interviewed}}</button>
     </div>
-
-    <button class="btn btn-default pull-right" ng-click='$event.stopPropagation()'>Save Listing</button>
-    <button class="btn btn-default pull-right" ng-click='$event.stopPropagation()'>Quick Apply</button>
+    </div>
   </div>
 
 </div>
@@ -26,12 +26,8 @@
 
 
 
-<!-- <p>user: {{ctrl.user}}</p>
 
-<p>email : {{ctrl.email}}</p>
-
-<p>jobs: {{ctrl.userJobs}}</p> -->
-
+<p>jobSaved: {{ctrl.user.jobSaved[0].posting.Title}}</p>
 
 
 

@@ -34,6 +34,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 	});
 //});
 
+//SCRAPING
 // var scrapeFreshBooks = require('./scrape/FreshBooks')
 // FreshBooksData = scrapeFreshBooks();
 // var scrapeShopify = require('./scrape/Shopify')
@@ -175,7 +176,7 @@ app.get('/deleteAllUser',function(req,res) {
 });
 
 
-
+//what is this??
 app.put('/saveJob/:Id',function(req,res){
 	var user;
 	User.findOne({email:req.params.Id}, function(err, x) {
@@ -186,8 +187,16 @@ app.put('/saveJob/:Id',function(req,res){
 	    } else {
 	        res.json(x);
 	        user = x;
+	        var newJob = {
+	        id: Id,
+	        researched: false,
+	        resumed: false,
+	        applied: false,
+	        interviewed: false
+	        }
 
-	        user.jobSaved.push(Id)
+	        //add: don't add duplicates
+	        user.jobSaved.push(newJob)
 
 			User.update({"_id":req.params.objectId},user,{},function(err,object){
 				if(err){
@@ -312,8 +321,17 @@ app.get('/saveLink/:Email/:JobId',function(req,res) {
 	           .json({err:err});
 	    } else {
 	        res.json(x);
-	        console.log(x[0].jobSaved)
-	        x[0].jobSaved.push(req.params.JobId);
+	        //console.log(x[0].jobSaved)
+	        var newJob = {
+	        id: req.params.JobId,
+	        researched: false,
+	        resumed: false,
+	        applied: false,
+	        interviewed: false,
+	        notes: ''
+	        }
+
+	        x[0].jobSaved.push(newJob);
 	        User.update({email:req.params.Email},x[0],{},function(err,y){
 		        if(err){
 		            console.log(err);
