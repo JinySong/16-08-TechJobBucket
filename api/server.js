@@ -380,6 +380,7 @@ app.get('/deleteJob/:Email/:JobId',function(req,res) {
 
 //doesn't work
 app.put('/editJob/:Email/:JobId',function(req,res) {
+	console.log('endpoint hit')
 	var jobUpdate = {
         id: req.params.JobId,
         researched: req.body.researched,
@@ -394,7 +395,9 @@ app.put('/editJob/:Email/:JobId',function(req,res) {
 		if (!err) {
 			userUpdate = user;
 			for (var i=0; i<user.jobSaved.length; i++) {
+
 				if (user.jobSaved[i].id == req.params.JobId) {
+					console.log('inside updating user', user.jobSaved[i].id)
 					userUpdate.jobSaved[i] = jobUpdate;
 
 					User.update({'email':req.params.Email},userUpdate,{},function(err,object){

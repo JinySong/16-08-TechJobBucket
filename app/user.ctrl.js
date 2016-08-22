@@ -15,6 +15,7 @@
 		userVm.goToJob = goToJob;
 		userVm.deleteJob = deleteJob;
 		userVm.changeStatus = changeStatus;
+		userVm.addNotes = addNotes;
 
 		getUser(userVm.email);
 
@@ -75,6 +76,24 @@
 	  				jobUpdate = userVm.user.jobSaved[i];
 	  				jobUpdate[x] = !jobUpdate[x];
 	  				// console.log(jobUpdate, x);
+	  				jobUpdate = JSON.stringify(jobUpdate);
+	  				$http.put('/editJob/'+userVm.user.email+'/'+id,jobUpdate).then(function(res) {
+	  					console.log(res)
+	  				},function(err) {
+	  					console.log(err)
+	  				})
+	  			}
+	  		}
+	  	}
+
+	  	function addNotes(id, x) {
+	  		//console.log('hi')
+	  		var jobUpdate;
+	  		for (var i=0; i<userVm.user.jobSaved.length; i++) {
+	  			if (userVm.user.jobSaved[i].id == id) {
+	  				jobUpdate = userVm.user.jobSaved[i];
+	  				jobUpdate.notes = x;
+	  				//console.log(jobUpdate, x);
 	  				jobUpdate = JSON.stringify(jobUpdate);
 	  				$http.put('/editJob/'+userVm.user.email+'/'+id,jobUpdate).then(function(res) {
 	  					console.log(res)
