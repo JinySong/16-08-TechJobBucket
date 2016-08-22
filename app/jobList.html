@@ -2,7 +2,7 @@
 
 <div class="background-image"></div>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-main navbar-default">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -12,28 +12,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">TechJobBucket</a>
+      <div ng-href="/home">
+        <img class="logo" src="http://www.icon2s.com/wp-content/uploads/2013/07/black-white-metro-paint-bucket-icon.png">
+        <a class="navbar-brand">TechJobBucket</a>
+      </div>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <!-- <label for="search">Search</label> -->
-          <input ng-model="ctrl.search" 
-            type="text" 
-            class="form-control" 
-            id="search"
-            placeholder="Search">
-        </div>
-        <div class="form-group">
-          <!-- <label for="search">Sort</label> -->
-          <select class="form-control" 
-            ng-options="sort as sort.label for sort in ctrl.sortOptions"
-            ng-model='ctrl.sortSelect'
-            ng-change="ctrl.currentPage = 0"></select>
-        </div>
-      </form>
+      
       <ul class="nav navbar-nav navbar-right" ng-show='!ctrl.localStorage'>
         <li ng-click='ctrl.goToSignUp()'><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</a></li>
         <li ng-click='ctrl.goToSignUp()'><a><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Log-In</a></li>
@@ -51,15 +38,35 @@
 <div class="jumbotron">
   <div class="jumbo-content">
     <h1 class="display-3">Tech Jobs!</h1>
-    <p class="lead">Lots and Lots of Them...All at your finger tips!</p>
+    <p class="lead">Lots and lots of jobs... All at your fingertips!</p>
    
-      <a class="btn btn-default btn-lg" href="#" role="button">Learn more</a>
+      <a class="btn btn-default btn-lg" ng-click="{document.getElementById('jobs').scrollIntoView()}" role="button">Go to Jobs</a>
     </p>
   </div>
 </div>
 
 <div class="container">
-<div class="row">
+
+<div class="container-fluid">
+<form class="navbar-form navbar-left">
+        <div class="form-group">
+          <!-- <label for="search">Search</label> -->
+          <input ng-model="ctrl.search" 
+            type="text" 
+            class="form-control" 
+            id="search"
+            placeholder="Search">
+        </div>
+        <!-- <div class="form-group">
+          <select class="form-control" 
+            ng-options="sort as sort.label for sort in ctrl.sortOptions"
+            ng-model='ctrl.sortSelect'
+            ng-change="ctrl.currentPage = 0"></select>
+        </div> -->
+</form>
+</div>
+
+<div id='jobs' class="row">
   <div ng-repeat="job in ctrl.filtered = (ctrl.jobs|
       filter: {Title:ctrl.search} | 
       orderBy: ctrl.sortSelect.sortField : ctrl.sortSelect.reverse)"

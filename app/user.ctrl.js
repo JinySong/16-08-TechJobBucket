@@ -14,6 +14,7 @@
 		userVm.logOut = logOut;
 		userVm.goToJob = goToJob;
 		userVm.deleteJob = deleteJob;
+		userVm.changeStatus = changeStatus;
 
 		getUser(userVm.email);
 
@@ -66,6 +67,25 @@
 	            console.log('Job did not save to user: ', err)
 	        })
 	  	}
+
+	  	function changeStatus(id, x) {
+	  		var jobUpdate;
+	  		for (var i=0; i<userVm.user.jobSaved.length; i++) {
+	  			if (userVm.user.jobSaved[i].id == id) {
+	  				jobUpdate = userVm.user.jobSaved[i];
+	  				jobUpdate[x] = !jobUpdate[x];
+	  				// console.log(jobUpdate, x);
+	  				jobUpdate = JSON.stringify(jobUpdate);
+	  				$http.put('/editJob/'+userVm.user.email+'/'+id,jobUpdate).then(function(res) {
+	  					console.log(res)
+	  				},function(err) {
+	  					console.log(err)
+	  				})
+	  			}
+	  		}
+	  	}
+
+
 	});
 
 })();

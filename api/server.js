@@ -35,10 +35,10 @@ app.use(bodyParser.urlencoded({extended:false}));
 //});
 
 //SCRAPING
-// var scrapeFreshBooks = require('./scrape/FreshBooks')
-// FreshBooksData = scrapeFreshBooks();
-// var scrapeShopify = require('./scrape/Shopify')
-// ShopifyData = scrapeShopify();
+var scrapeFreshBooks = require('./scrape/FreshBooks')
+FreshBooksData = scrapeFreshBooks();
+var scrapeShopify = require('./scrape/Shopify')
+ShopifyData = scrapeShopify();
 
 app.get('/', function(req, res) {
 	res.send('Express is running!');
