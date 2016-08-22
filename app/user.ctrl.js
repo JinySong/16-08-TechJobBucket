@@ -13,6 +13,7 @@
 		userVm.goHome = goHome;
 		userVm.logOut = logOut;
 		userVm.goToJob = goToJob;
+		userVm.deleteJob = deleteJob;
 
 		getUser(userVm.email);
 
@@ -56,6 +57,15 @@
 		function goToJob(id) {
 	  		$location.path('/job/'+id)
 		}
+
+		function deleteJob(jobId) {
+	  		return $http.get('/deleteJob/'+localStorage.loginEmail+'/'+jobId).then(function(res) {
+	            console.log('Job Saved to User');
+	            location.reload();
+	        }, function(err) {
+	            console.log('Job did not save to user: ', err)
+	        })
+	  	}
 	});
 
 })();

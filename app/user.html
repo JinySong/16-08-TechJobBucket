@@ -23,7 +23,7 @@
     <div><textarea class="form-control" rows='3' placeholder="{{job.notes  || 'notes: '}}"></textarea></div>
     <div class="pull-right">
       <button class="btn btn-default"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save Notes</button>
-      <button class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Job</button>
+      <button class="btn btn-default" ng-click='ctrl.deleteJob(job.posting._id)'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Job</button>
     </div>
   </div>
     
