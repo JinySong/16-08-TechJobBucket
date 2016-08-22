@@ -15,13 +15,16 @@
   
   <div class="col-md-10">
     <div>
-      <button class="btn" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'>Research: {{job.researched}}</button>
-      <button class="btn btn-default" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'>Submit Resume: {{job.resumed}}</button>
-      <button class="btn btn-default" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'>Send Application: {{job.applied}}</button>
-      <button class="btn btn-default" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'>Getting the Interview: {{job.interviewed}}</button>
+      <button class="btn" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'><span ng-class='{"glyphicon glyphicon-ok":job.researched,"glyphicon glyphicon-remove":!job.researched}' aria-hidden="true"> Research: {{job.researched}}</button>
+      <button class="btn btn-default" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'><span ng-class='{"glyphicon glyphicon-ok":job.researched,"glyphicon glyphicon-remove":!job.researched}' aria-hidden="true"> Submit Resume: {{job.resumed}}</button>
+      <button class="btn btn-default" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'><span ng-class='{"glyphicon glyphicon-ok":job.researched,"glyphicon glyphicon-remove":!job.researched}' aria-hidden="true"> Send Application: {{job.applied}}</button>
+      <button class="btn btn-default" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}'><span ng-class='{"glyphicon glyphicon-ok":job.researched,"glyphicon glyphicon-remove":!job.researched}' aria-hidden="true"> Getting the Interview: {{job.interviewed}}</button>
     </div>
     <div><textarea class="form-control" rows='3' placeholder="{{job.notes  || 'notes: '}}"></textarea></div>
-    <div><button class="btn btn-default pull-right">Save Notes</button></div>
+    <div class="pull-right">
+      <button class="btn btn-default"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save Notes</button>
+      <button class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Job</button>
+    </div>
   </div>
     
       

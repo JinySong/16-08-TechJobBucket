@@ -351,6 +351,34 @@ app.get('/saveLink/:Email/:JobId',function(req,res) {
 	});
 });
 
+app.get('/deleteJob/:Email/:JobId',function(req,res) {
+	User.find({email:req.params.Email}, function(err, x) {
+	    if (err) {
+	        console.log(err);
+	        res.status(400)
+	           .json({err:err});
+	    } else {
+	    	x = x[0];
+	    	for (var i=0; i<x.jobSaved.length; i++) {
+	    		if (req.params.JobId == x.jobSaved[i].id) {
+	    			x.jobSaved.splice(i,1)
+	    			User.update({email:req.params.Email},x,{},function(err,y){
+				        if(err){
+				            console.log(err);
+				        }
+				        else{
+				            console.log(y);
+				        }
+		    		});
+	    		}
+	    	}
+	    	res.json(x)       
+		}
+	});
+});
+
+
+//doesn't work
 app.put('/editJob/:Email/:JobId',function(req,res) {
 	var jobUpdate = {
         id: req.params.JobId,
