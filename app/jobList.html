@@ -45,26 +45,75 @@
   </div>
 </div>
 
+
+
+  <section id="progress-section">
+    <div class="container">
+      <h2>Keep Your Progress</h2>
+
+        <div class="progress-description">
+          <div class="col-md-6">
+            <h3 class="block-title">Step 1: Do your research</h3>
+            <p>Dig up enough facts to help you talk intelligently to your potential employer. Interviewers are always impressed when you have conducted your research thoroughly and can ask informed, intelligent questions about the organization and the job.</p>
+          </div> 
+
+          <div class="col-md-6 offset-md-1">
+            <h3 class="block-title">Step 2: Prep your resume</h3>
+            <p>Analyze the job description. Outline the knowledge, skills and abilities required. Compare your skills and qualifications to the job requirements. Think about what the employer is look for.</p>
+          </div> 
+        </div>
+
+
+        <div class="progress-icons">
+          <div class="col-md-3 col-sm-3">
+            <span class="icon-feature glyphicon glyphicon-search">
+          </div>
+          <div class="col-md-3 col-sm-3">
+            <span class="icon-feature glyphicon glyphicon-list-alt">
+          </div>
+          <div class="col-md-3 col-sm-3">
+            <span class="icon-feature glyphicon glyphicon-send">
+          </div>
+          <div class="col-md-3 col-sm-3">
+            <span class="icon-feature glyphicon glyphicon-briefcase">
+          </div>           
+        </div>
+
+        <div class="progress-description row">
+          <div class="col-md-6 offset-md-6">
+            <h3 class="block-title">Step 3: Submit your Application</h3>
+            <p>Read and follow instructions carefully. Keep your application consistent with your resume. Proofread your application before submitting it. Don't volunteer any negative information. This is a good time to reach out to your professional network.</p>
+          </div> 
+          <div class="col-md-6 offset-md-6">
+            <h3 class="block-title">Step 4: Get ready to interview</h3>
+            <p>Prepare your responses. Go over the job posting and your resume. Dress sharp, look your best, and remember that everything is a learning experience.</p>
+          </div> 
+        </div>
+            
+    </div>
+  </section>
+
+
 <div class="container">
 
-<div class="container-fluid">
-<form class="navbar-form navbar-left">
-        <div class="form-group">
-          <!-- <label for="search">Search</label> -->
-          <input ng-model="ctrl.search" 
-            type="text" 
-            class="form-control" 
-            id="search"
-            placeholder="Search">
-        </div>
-        <!-- <div class="form-group">
-          <select class="form-control" 
-            ng-options="sort as sort.label for sort in ctrl.sortOptions"
-            ng-model='ctrl.sortSelect'
-            ng-change="ctrl.currentPage = 0"></select>
-        </div> -->
-</form>
-</div>
+  <div class="search container-fluid">
+    <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <!-- <label for="search">Search</label> -->
+              <input ng-model="ctrl.search" 
+                type="text" 
+                class="form-control" 
+                id="search"
+                placeholder="Search">
+            </div>
+            <!-- <div class="form-group">
+              <select class="form-control" 
+                ng-options="sort as sort.label for sort in ctrl.sortOptions"
+                ng-model='ctrl.sortSelect'
+                ng-change="ctrl.currentPage = 0"></select>
+            </div> -->
+    </form>
+  </div>
 
 <div id='jobs' class="row">
   <div ng-repeat="job in ctrl.filtered = (ctrl.jobs|

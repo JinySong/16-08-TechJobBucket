@@ -49,7 +49,8 @@ big();
             var Title = cheerio.load(body)('h1').text();
             var Location = cheerio.load(body)('li[title="Location"]').text();
             var Type = cheerio.load(body)('#resumator-job-employment').text().replace(/(\r\n|\n|\r|\s)/gm,'');
-            var Reqli = (cheerio.load(body)('p:contains("Responsibilities")').next('ul').html() || '').replace(/<.+?>/g,'').split('</li>');
+            var Resli = (cheerio.load(body)('p:contains("Responsibilities")').next('ul').html() || '').replace(/<.+?>/g,'').split('</li>');
+            var Reqli = (cheerio.load(body)('p:contains("Successful candidates will have: ")').next('ul').html() || '').replace(/<.+?>/g,'').split('</li>');
       
             console.log(Title, Reqli, '\n\n')
           } else {

@@ -1,5 +1,5 @@
 /*homepage*/
-.container-fluid {
+.container-fluid{
     padding: 0 !important;
 }
 
@@ -9,7 +9,10 @@
   font: white;
   z-index: 9999;
   position: absolute;
-    color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
 }
 
 .navbar-main .navbar-nav > li > a {
@@ -77,19 +80,19 @@
 
 /*user*/
 .listing {
-	background-color: yellow;
+  background-color: yellow;
 }
 
 .listing-border{
-	height: 200px;
-	margin-bottom: 30px;
+  height: 200px;
+  margin-bottom: 30px;
 }
 
 .listing-box {
-	padding: 0px;
-	margin: 0px;
-	height: 100px;
-	/*background-color: red;*/
+  padding: 0px;
+  margin: 0px;
+  height: 100px;
+  /*background-color: red;*/
 }
 .hovereffect {
   width: 100%;
