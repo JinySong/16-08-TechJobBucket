@@ -86,7 +86,17 @@
   margin-left: 22px;
   margin-top: 23px; }
 
+/*
+Green Rain
+http://i.imgur.com/fJ1fizf.gif
+Coffee
+http://i.imgur.com/e4qryvN.gif
 
+
+grey glass building
+http://wizardconstructions.com/resources/bg/career.jpg
+
+*/
 
 
 
@@ -97,7 +107,7 @@
   /*transform: translateY(-25%);*/
   height: 100vh;
   /*height: 500px;*/
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://careers.teledirectasia.com/wp-content/uploads/2015/03/job-career-header1.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("http://i.imgur.com/e4qryvN.gif");
   background-size: 100% 100%;
   border-radius: 0;
   color: white; }
@@ -319,3 +329,15 @@
   box-shadow: 0 0 5px #fff; }
 
 /*# sourceMappingURL=app.css.map */
+
+
+
+
+
+.modal-dialog {
+  width: 600px;
+  margin: 120px auto;
+}
+
+
+

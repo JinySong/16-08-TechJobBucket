@@ -21,6 +21,9 @@
 		joblVm.logOut = logOut;
 		joblVm.localStorage = !!localStorage.authToken;
 		joblVm.scrollNav = scrollNav;
+		joblVm.scrollToAnchor = scrollToAnchor;
+		joblVm.registerLoginModal = registerLoginModal;
+		registerLoginModal();
 		scrollNav()
 
 		// $scope.$watch(joblVm.localStorage, function () {
@@ -62,16 +65,16 @@
 	            console.log('Job did not save to user: ', err)
 	        })
 	  	}
-			    
+
 	  	function scrollNav () {
 	  		$(window).scroll(function() {
 	  			var scroll = $(window).scrollTop();
 	  			 // $("#features-section .col-md-6").css("visibility", "hidden");
 
-	  			 console.log(scroll)
+	  			 //console.log(scroll)
 
 
-			    if (scroll >= 500) {
+			    if (scroll >= 100) {
 			        $(".navbar").addClass("nav-fixed");
 			    } else {
 			        $(".navbar").removeClass("nav-fixed");
@@ -86,6 +89,21 @@
 			    }
 			});
 	  	}
+
+		function scrollToAnchor(){
+		    $('html,body').animate({scrollTop: $("#jobs").offset().top-140},'slow');
+		}
+
+		function registerLoginModal(){
+			$(document).ready(function(){
+			    $("#Register").click(function(){
+			        $("#RegisterModal").modal();
+			    });
+			    $("#LogIn").click(function(){
+			        $("#LogInModal").modal();
+			    });
+			});
+		}
 
 
 	});
