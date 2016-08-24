@@ -2,7 +2,7 @@
 
 <div class="background-image"></div>
 
-<nav class="nav-fixed navbar navbar-main navbar-default">
+<nav class="nav-top navbar navbar-main navbar-default">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -20,7 +20,6 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
       <ul class="nav navbar-nav navbar-right" ng-show='!ctrl.localStorage'>
         <li ng-click='ctrl.goToSignUp()'><a><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</a></li>
         <li ng-click='ctrl.goToSignUp()'><a><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Log-In</a></li>
@@ -40,7 +39,7 @@
     <h1 class="display-3">Tech Jobs!</h1>
     <p class="lead">Lots and lots of jobs... All at your fingertips!</p>
    
-      <a class="btn btn-default btn-lg" ng-click="{document.getElementById('jobs').scrollIntoView()}" role="button">Go to Jobs</a>
+      <a class="btn btn-default btn-lg" role="button">Go to Jobs</a>
     </p>
   </div>
 </div>
@@ -49,19 +48,19 @@
 
   <section id="features-section">
     <div class="container">
-      <h2>Cool Features</h2>
+      <h2 class="animated visibleNO">Cool Features</h2>
 
-          <div class="col-md-6">
+          <div class="col-md-6 visibleNO">
             <div class="col-md-3">
               <span class="icon-feature glyphicon glyphicon-user">
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 ">
               <h3 class="block-title">Create an account to save jobs</h3>
               <p>Analyze the job description. Outline the knowledge, skills and abilities required. Compare your skills and qualifications to the job requirements. Think about what the employer is look for.</p>
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 visibleNO">
             <div class="col-md-3">
               <span class="icon-feature glyphicon glyphicon-ok">
             </div>
@@ -71,7 +70,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 visibleNO">
             <div class="col-md-3">
               <span class="icon-feature glyphicon glyphicon-signal">
             </div>
@@ -81,7 +80,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 visibleNO">
             <div class="col-md-3">
               <span class="icon-feature glyphicon glyphicon-pencil"></span>
             </div>

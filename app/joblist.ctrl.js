@@ -19,7 +19,9 @@
 		joblVm.saveJob = saveJob;
 		joblVm.goToAcc = goToAcc;
 		joblVm.logOut = logOut;
-		joblVm.localStorage = !!localStorage.authToken
+		joblVm.localStorage = !!localStorage.authToken;
+		joblVm.scrollNav = scrollNav;
+		scrollNav()
 
 		// $scope.$watch(joblVm.localStorage, function () {
 		// })
@@ -59,6 +61,30 @@
 	        }, function(err) {
 	            console.log('Job did not save to user: ', err)
 	        })
+	  	}
+			    
+	  	function scrollNav () {
+	  		$(window).scroll(function() {
+	  			var scroll = $(window).scrollTop();
+	  			 // $("#features-section .col-md-6").css("visibility", "hidden");
+
+	  			 console.log(scroll)
+
+
+			    if (scroll >= 500) {
+			        $(".navbar").addClass("nav-fixed");
+			    } else {
+			        $(".navbar").removeClass("nav-fixed");
+			    }
+
+			    if (scroll >= $("#features-section").scrollTop()+300) {
+			        $("#features-section h2").addClass("visibleYES animated fadeIn");
+			    }
+
+			    if (scroll >= $("#features-section .col-md-6").scrollTop()+300) {
+			        $("#features-section .col-md-6").addClass("visibleYES animated fadeInUp");
+			    }
+			});
 	  	}
 
 
