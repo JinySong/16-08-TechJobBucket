@@ -2,6 +2,8 @@
 .container-fluid {
   padding: 0 !important; }
 
+
+
 .navbar-main {
   background: transparent;
   border: none;
@@ -48,26 +50,26 @@
   top: 50%;
   transform: translateY(-50%); }
 
-/*progress*/
+/*features*/
 
-#progress-section {
+#features-section {
   background-color: #204DB0;
+  color: white;
 }
 
-#progress-section h2 {
+#features-section h2, #progress h2 {
   text-align: center;
-  color:white;
   font-size: 40px;
-  margin: 50px;
+  margin-top: 50px;
+  margin: 30px;
+  padding-top: 30px;
+}
+#features-section h3 {
+  margin-top: 0;
 }
 
-
-.progress-icons {
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-  margin: 50px 0;
-  cursor: pointer;
+#features-section .col-md-6 {
+  margin: 30px 0;
 }
 
 .icon-feature {
@@ -81,22 +83,7 @@
   font-size: 36px;
   color: #204DB0;
   position: relative;
-  z-index: 9;
 }
-
-.progress-description {
-  color: white;
-  margin: 20px;
-}
-
-.progress-icons h3 {
-  margin-top: 10px;
-  text-transform: uppercase;
-}
-.progress-icons p {
-  font-size: 16px;
-}
-
 
 .icon-feature:hover {
   background-color: #1E6DE5;
@@ -104,6 +91,70 @@
   border: 8px solid #fff;
   line-height: 88px;
 }
+
+
+
+/* Progress */
+#progress {
+  text-align:center;
+  color:white;
+  background-color: #204DB0
+}
+
+#progress ul {
+  text-align: center;
+  margin-bottom: 48px;
+  padding-left: 0;
+}
+#progress ul li
+{
+  display: inline-block;
+  margin: 0 70px; 
+  position: relative;
+}
+#progress ul li:before{
+  position: absolute;
+  border: 3px solid white;
+  height: 0;
+  width: 150px;
+  content: "";
+  top: 35%;
+  left: 100px;
+}
+
+#progress ul li:last-child:before {
+  display: none;
+}
+
+#progress ul li span{
+  color: white;
+  font-size: 16px;
+  text-transform: lowercase;
+  font-weight: bold;
+}
+#progress ul li span.glyphicon {
+  width: 100px;
+  height: 100px;
+  display: block;
+  border-radius: 50%;
+  border: 7px solid white;
+  font-size: 30px;
+  line-height: 90px;
+  color: #204DB0;
+  margin-bottom: 20px;
+  cursor:default;
+}
+#progress ul li:hover > span.glyphicon {
+  background-color: #1E6DE5;
+  color: #fff;
+
+}
+#progress ul li:hover {
+  text-decoration: none;
+}
+
+
+
 
 /*user*/
 .listing {
