@@ -32,6 +32,7 @@
   transition: all .2s ease-in; 
   padding-top: 30px;
   line-height: 30px
+
 }
 
 .nav-top.navbar-main .navbar-nav > li > a:hover,
@@ -176,6 +177,7 @@ http://wizardconstructions.com/resources/bg/career.jpg
   font-size: 36px;
   color: #204DB0;
   position: relative;
+  /*transition: 1s fadeIn;*/
 }
 
 .icon-feature:hover {
@@ -183,6 +185,7 @@ http://wizardconstructions.com/resources/bg/career.jpg
   color: #fff;
   border: 8px solid #fff;
   line-height: 88px;
+  animation: fadeIn .6s;
 }
 
 
