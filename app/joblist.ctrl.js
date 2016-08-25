@@ -28,6 +28,11 @@
 
 		// $scope.$watch(joblVm.localStorage, function () {
 		// })
+
+		 $(document).ready(function(){
+      $('.parallax').parallax();
+    });
+        
 		
 	  	function goToJob(id){
 	  		$location.path('/job/'+id)
@@ -102,6 +107,8 @@
 			    $("#LogIn").click(function(){
 			        $("#LogInModal").modal();
 			    });
+
+			    $('.parallax').parallax();
 			});
 		}
 
