@@ -124,6 +124,25 @@ http://wizardconstructions.com/resources/bg/career.jpg
   top: 50%;
   transform: translateY(-50%); }
 
+.seeMore {
+  width: 300px;
+  position:absolute;
+  bottom: 3%;
+  left: 50%;
+  margin: 0 -150px;
+  text-align:center;
+}
+.seeMore h4 {
+  padding: 15px;
+}
+.seeMore span {
+  font-size: 2.2em;
+  line-height: 5px;
+}
+.swing {
+  animation-iteration-count: infinite;
+}
+
 /*features*/
 
 #features-section {

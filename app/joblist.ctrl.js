@@ -92,6 +92,7 @@
 			    if (scroll >= $("#features-section .col-md-6").scrollTop()+300) {
 			        $("#features-section .col-md-6").addClass("visibleYES animated fadeInUp");
 			    }
+			    if (scroll >= 2) $('.seeMore').addClass('animated fadeOut')
 			});
 	  	}
 
