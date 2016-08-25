@@ -77,6 +77,7 @@
 	  			 // $("#features-section .col-md-6").css("visibility", "hidden");
 
 	  			 //console.log(scroll)
+	  			 console.log($("#progress").scrollTop())
 
 
 			    if (scroll >= 100) {
@@ -85,14 +86,18 @@
 			        $(".navbar").removeClass("nav-fixed");
 			    }
 
-			    if (scroll >= $("#features-section").scrollTop()+300) {
-			        $("#features-section h2").addClass("visibleYES animated fadeIn");
-			    }
+			    if (scroll >= 2) $('.seeMore').addClass('animated fadeOut')
 
-			    if (scroll >= $("#features-section .col-md-6").scrollTop()+300) {
+			    if (scroll >= $("#features-section").position().top - $("#features-section").height()) {
+			        $("#features-section h2").addClass("visibleYES animated fadeIn");
 			        $("#features-section .col-md-6").addClass("visibleYES animated fadeInUp");
 			    }
-			    if (scroll >= 2) $('.seeMore').addClass('animated fadeOut')
+
+			    if (scroll >= $("#progress").position().top - $("#progress").height()) {
+			        $("#progress h2").addClass("visibleYES animated fadeIn");
+			        $("#progress .allIcon").addClass("visibleYES animated fadeInUp");
+			    }
+
 			});
 	  	}
 
