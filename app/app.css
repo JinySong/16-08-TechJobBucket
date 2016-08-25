@@ -250,6 +250,26 @@ http://wizardconstructions.com/resources/bg/career.jpg
 }
 
 
+/*statistics-section*/
+.statistics-section {
+  margin-top: -5px;
+  text-align: center;
+  color: #204DB0;
+  padding: 82px 0 66px 0;
+}
+.statistics-section  h1 {
+  font-size: 40px;
+  font-weight: 400;
+}
+.statistics-section  h1,
+.statistics-section p {
+  margin: 0;
+}
+.statistics-section p {
+  font-size: 12px;
+  margin-top: 20px;
+}
+
 
 
 /*user*/

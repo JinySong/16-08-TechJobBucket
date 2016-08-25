@@ -22,16 +22,14 @@
 		joblVm.localStorage = !!localStorage.authToken;
 		joblVm.scrollNav = scrollNav;
 		joblVm.scrollToAnchor = scrollToAnchor;
-		joblVm.registerLoginModal = registerLoginModal;
-		registerLoginModal();
+		joblVm.docReady = docReady;
+		docReady();
 		scrollNav()
+		var stopLoop = !0;
 
 		// $scope.$watch(joblVm.localStorage, function () {
 		// })
 
-		 $(document).ready(function(){
-      $('.parallax').parallax();
-    });
         
 		
 	  	function goToJob(id){
@@ -77,7 +75,7 @@
 	  			 // $("#features-section .col-md-6").css("visibility", "hidden");
 
 	  			 //console.log(scroll)
-	  			 console.log($("#progress").scrollTop())
+	  			// console.log($("#progress").scrollTop())
 
 
 			    if (scroll >= 100) {
@@ -88,7 +86,7 @@
 
 			    if (scroll >= 2) $('.seeMore').addClass('animated fadeOut')
 
-			    if (scroll >= $("#features-section").position().top - $("#features-section").height()) {
+			    if (scroll >= $("#features-section").position().top - $(window).height()) {
 			        $("#features-section h2").addClass("visibleYES animated fadeIn");
 			        $("#features-section .col-md-6").addClass("visibleYES animated fadeInUp");
 			    }
@@ -98,14 +96,30 @@
 			        $("#progress .allIcon").addClass("visibleYES animated fadeInUp");
 			    }
 
+			    
+			    console.log($(window).height())
+			    if (scroll >= $("#statistics-section").position().top - $(window).height() && stopLoop) {
+					$('#statJob').animateNumber({ number: 1450 },2000);
+					$('#statCo').animateNumber({ number: 245 }, 2000);
+					$('#statSaved').animateNumber({ number: 312 }, 2000);
+					$('#statUser').animateNumber({ number: 103 }, 2000);
+					stopLoop = !1;
+					console.log(stopLoop)
+			    }
+
 			});
 	  	}
+
+
+
+
+
 
 		function scrollToAnchor(){
 		    $('html,body').animate({scrollTop: $("#jobs").offset().top-140},'slow');
 		}
 
-		function registerLoginModal(){
+		function docReady(){
 			$(document).ready(function(){
 			    $("#Register").click(function(){
 			        $("#RegisterModal").modal();
@@ -114,8 +128,21 @@
 			        $("#LogInModal").modal();
 			    });
 
-			    $('.parallax').parallax();
 			});
+
+
+			// $('.statistics-section').each(function (){
+			// 	var $this = $(this);
+			// 	var myVal = $(this).data("value");
+
+			// 	$this.appear(function()
+			// 	{
+			// 		$('#project').animateNumber({ number: 145 }, 2000);
+			// 		$('#work').animateNumber({ number: 2456 }, 2000);
+			// 		$('#consumed').animateNumber({ number: 3125 }, 2000);
+			// 		$('#videos').animateNumber({ number: 2478 }, 2000);
+			// 	});
+			// });
 		}
 
 
