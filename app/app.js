@@ -42,10 +42,6 @@
 						
 					}
 	            })
-	            .when('/registerLogin', {
-	              templateUrl: 'registerLogin.html',
-	              controller: 'RegLogCtrl as ctrl'
-	            })
 	            .otherwise({
 	              redirectTo: '/home'
 	            });

@@ -27,6 +27,14 @@
 		scrollNav()
 		var stopLoop = !0;
 
+
+		//register & login function
+		joblVm.register_btn = 'Sign Up';
+		joblVm.auth_btn = "Log In";
+		joblVm.register = register;
+		joblVm.authenticate = authenticate;
+
+
 		// $scope.$watch(joblVm.localStorage, function () {
 		// })
 
@@ -86,33 +94,26 @@
 
 			    if (scroll >= 2) $('.seeMore').addClass('animated fadeOut')
 
-			    if (scroll >= $("#features-section").position().top - $(window).height()) {
+			    if ($("#features-section").position().top && scroll >= $("#features-section").position().top - $(window).height()) {
 			        $("#features-section h2").addClass("visibleYES animated fadeIn");
 			        $("#features-section .col-md-6").addClass("visibleYES animated fadeInUp");
 			    }
 
-			    if (scroll >= $("#progress").position().top - $("#progress").height()) {
+			    if ($("#progress").position().top && scroll >= $("#progress").position().top - $("#progress").height()) {
 			        $("#progress h2").addClass("visibleYES animated fadeIn");
 			        $("#progress .allIcon").addClass("visibleYES animated fadeInUp");
 			    }
 
-			    
-			    console.log($(window).height())
 			    if (scroll >= $("#statistics-section").position().top - $(window).height() && stopLoop) {
 					$('#statJob').animateNumber({ number: 1450 },2000);
 					$('#statCo').animateNumber({ number: 245 }, 2000);
 					$('#statSaved').animateNumber({ number: 312 }, 2000);
 					$('#statUser').animateNumber({ number: 103 }, 2000);
 					stopLoop = !1;
-					console.log(stopLoop)
 			    }
 
 			});
 	  	}
-
-
-
-
 
 
 		function scrollToAnchor(){
@@ -127,22 +128,49 @@
 			    $("#LogIn").click(function(){
 			        $("#LogInModal").modal();
 			    });
-
 			});
+		}
 
+		function register(){
+			console.log('how many times this will run')
+			//check passwords
+			if(joblVm.password == joblVm.repassword && joblVm.password != ''){
+				var user = {
+					email:joblVm.email,
+					password:joblVm.password
+				}
+				user = JSON.stringify(user);
+				$http.post('/addUser',user)
+				.then(function(res){
+					authenticate();
+				})
+			}
+			else{
+				joblVm.register_btn = "Passwords Don't Match";
+			}
+		}
 
-			// $('.statistics-section').each(function (){
-			// 	var $this = $(this);
-			// 	var myVal = $(this).data("value");
+		function authenticate(){
+			var user = {
+				email:joblVm.email,
+				password:joblVm.password
+			}
+			var email = joblVm.email;
 
-			// 	$this.appear(function()
-			// 	{
-			// 		$('#project').animateNumber({ number: 145 }, 2000);
-			// 		$('#work').animateNumber({ number: 2456 }, 2000);
-			// 		$('#consumed').animateNumber({ number: 3125 }, 2000);
-			// 		$('#videos').animateNumber({ number: 2478 }, 2000);
-			// 	});
-			// });
+			user = JSON.stringify(user);
+			$http.post('/authenticate',user)
+			.then(function(res){
+				console.log('loged in');
+				console.log(res)
+				console.log(res.config)
+				console.log(res.config.data)
+				console.log(res.config.data.email)
+
+				localStorage.loginEmail = joblVm.email;
+				joblVm.auth_btn = res.data.msg;
+				console.log($location.path());
+				$location.path('/user/'+email);
+			})
 		}
 
 

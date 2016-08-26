@@ -35,7 +35,7 @@
 
 
 
-<!-- Modal -->
+<!-- Register Modal -->
   <div class="modal fade" id="RegisterModal" role="dialog">
     <div class="modal-dialog">
     
@@ -46,7 +46,26 @@
           <h4 class="modal-title">RegisterModal</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <form method="post" class="stacked-form" ng-submit="ctrl.register()">
+            <div class="row">
+              <div class="col-xs-12">
+                <span class="field-validation-valid" data-valmsg-for="EmailAddress" data-valmsg-replace="true"></span>
+                <input class="form-input bs-input-box stacked-input-box" type="email" name="EmailAddress" value="" placeholder="Email Address" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.email" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                <input class="form-input bs-input-box stacked-input-box" type="password" name="Password" placeholder="Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.password" />
+              </div>
+
+              <div class="col-xs-12">
+                <span class="field-validation-valid" data-valmsg-for="Re-type Password" data-valmsg-replace="true"></span>
+                <input class="form-input bs-input-box stacked-input-box" type="password" name="Password" placeholder="Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.repassword" />
+              </div>
+            </div>
+            <input data-dismiss="modal" type="submit" value="{{ctrl.register_btn}}" class="form-input btn btn-primary bs-form__button btn-lg stacked-input-box" ng-click='ctrl.register()'/>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -56,6 +75,8 @@
     </div>
   </div>
   
+
+<!-- Login Modal -->
 <div class="modal fade" id="LogInModal" role="dialog">
     <div class="modal-dialog">
     
@@ -66,7 +87,21 @@
           <h4 class="modal-title">LogInModal</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <form method="post" class="stacked-form">
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="field-validation-valid" data-valmsg-for="EmailAddress" data-valmsg-replace="true"></span>
+        <input type="text" name="EmailAddress" value="" placeholder="Email Address" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.email" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+        <input class="form-input bs-input-box stacked-input-box" type="password" name="Password" placeholder="Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.password" />
+      </div>
+    </div>
+    <input type="submit" value="{{ctrl.auth_btn}}" class="form-input btn btn-primary bs-form__button btn-lg stacked-input-box" data-dismiss="modal" ng-click='ctrl.authenticate()'/>
+  </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
