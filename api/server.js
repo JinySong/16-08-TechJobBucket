@@ -28,7 +28,11 @@ app.use(bodyParser.urlencoded({extended:false}));
 //var authentication = require("./middleware/auth");
 
 //models.sequelize.sync().then(function(){
+<<<<<<< HEAD
 	app.listen(8080,function(){
+=======
+	app.listen(80,function(){
+>>>>>>> e32e87c9ad31cc6682aa269af43c39e23f647c20
 		console.log('Listening on http://localhost:%s',8080);
 		console.log('Stop Server With CTRL + C');
 	});
