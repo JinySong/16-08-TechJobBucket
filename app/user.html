@@ -1,0 +1,68 @@
+<div class="container">
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">TechJobBucket</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <!-- <label for="search">Search</label> -->
+          <input ng-model="ctrl.search" 
+            type="text" 
+            class="form-control" 
+            id="search"
+            placeholder="Search">
+        </div>
+        <div class="form-group">
+          <!-- <label for="search">Sort</label> -->
+          <select class="form-control" 
+            ng-options="sort as sort.label for sort in ctrl.sortOptions"
+            ng-model='ctrl.sortSelect'
+            ng-change="ctrl.currentPage = 0"></select>
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-click='ctrl.goHome()'><a><span class="glyphicon glyphicon-th" aria-hidden="true"></span> See all Jobs</a></li>
+        <li ng-click='ctrl.logOut()'><a><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log-Out</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<h1>Welcome, User!</h1>
+
+<hr>
+
+<div class="media row" ng-repeat='job in ctrl.user.jobSaved'">
+    
+  <div class="col-md-2 hvr-float-shadow" ng-click="ctrl.goToJob(job.posting._id)">
+    <img class="img-responsive" ng-src="{{job.posting.Logo}}">
+    <h4>{{job.posting.Title}}</h4>
+  </div>
+  
+  <div class="col-md-10">
+    <div>
+      <button class="btn" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}' ng-click='ctrl.changeStatus(job.posting._id,"researched")'><span ng-class='{"glyphicon glyphicon-ok":job.researched,"glyphicon glyphicon-remove":!job.researched}' aria-hidden="true" > Research Position</button>
+      <button class="btn btn-default" ng-class='{"btn-success":job.resumed, "btn-danger":!job.resumed}' ng-click='ctrl.changeStatus(job.posting._id,"resumed")'><span ng-class='{"glyphicon glyphicon-ok":job.resumed,"glyphicon glyphicon-remove":!job.resumed}' aria-hidden="true"> Prepare Resume and Cover Letter</button>
+      <button class="btn btn-default" ng-class='{"btn-success":job.applied, "btn-danger":!job.applied}' ng-click='ctrl.changeStatus(job.posting._id,"applied")'><span ng-class='{"glyphicon glyphicon-ok":job.applied,"glyphicon glyphicon-remove":!job.applied}' aria-hidden="true"> Submit Application </button>
+      <button class="btn btn-default" ng-class='{"btn-success":job.interviewed, "btn-danger":!job.interviewed}' ng-click='ctrl.changeStatus(job.posting._id,"interviewed")'><span ng-class='{"glyphicon glyphicon-ok":job.interviewed,"glyphicon glyphicon-remove":!job.interviewed}' aria-hidden="true"> Go for Interview</button>
+    </div>
+    <div><textarea class="form-control" rows='3' placeholder="{{job.notes  || 'notes: '}}" ng-model='job.notes'></textarea></div>
+    <div class="pull-right">
+      <button class="btn btn-default"  ng-click='ctrl.addNotes(job.posting._id,job.notes)'><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save Notes</button>
+      <button class="btn btn-default" ng-click='ctrl.deleteJob(job.posting._id)'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Job</button>
+    </div>
+  </div>
+    
+      
+</div>
+</div>

@@ -1,0 +1,200 @@
+/*homepage*/
+.container-fluid{
+    padding: 0 !important;
+}
+
+.navbar-main {
+  background: transparent;
+  border: none;
+  font: white;
+  z-index: 9999;
+  position: absolute;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.navbar-main .navbar-nav > li > a {
+    color: white;
+    transition: all .2s ease-in;
+}
+.navbar-main .navbar-nav > li > a:hover,
+.navbar-main .navbar-nav > li > a:focus {
+    color: gray;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+  font-size: 30px;
+  margin-top: 20px;
+  margin-left: 57px;
+  color: white;
+}
+
+.logo {
+  -webkit-filter: brightness(0) invert(1);
+  height: 50%;
+  position: absolute;
+  margin-left: 30px;
+  margin-top:27px;
+}
+/*.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: white;
+    background-color: white;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: white;
+    background-color: white;
+}*/
+
+/*.background-image {
+    height: 400px;
+    background-image: url('https://careers.teledirectasia.com/wp-content/uploads/2015/03/job-career-header1.jpg');
+    width: 100%;
+    position: absolute;
+    top:0;
+    z-index: -100;
+}*/
+
+.container-fluid .jumbotron {
+   position: relative;
+   /*transform: translateY(-25%);*/
+   height: 500px;
+   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('https://careers.teledirectasia.com/wp-content/uploads/2015/03/job-career-header1.jpg');
+   background-size: 100% 100%;
+   border-radius: 0;
+   color:white;
+
+}
+
+.jumbo-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+/*user*/
+.listing {
+  background-color: yellow;
+}
+
+.listing-border{
+  height: 200px;
+  margin-bottom: 30px;
+}
+
+.listing-box {
+  padding: 0px;
+  margin: 0px;
+  height: 100px;
+  /*background-color: red;*/
+}
+.hovereffect {
+  width: 100%;
+  height: 100%;
+/*  float: left;*/
+/*  overflow: hidden;*/
+  position: relative;
+  text-align: center;
+  cursor: default;
+}
+
+.hovereffect .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  background-color: rgba(75,75,75,0);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.hovereffect:hover .overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  max-width: none;
+  width: 100%;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.hovereffect:hover img {
+  opacity: 1;
+  /*filter: alpha(opacity=40);*/
+  -webkit-transform: translate3d(0,60px,0);
+  transform: translate3d(0,60px,0);
+}
+
+
+.hovereffect h2 {
+  text-transform: uppercase;
+  height: 60px;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  padding: 14px; 
+  margin: 0;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-transform: translateY(139px);
+  -ms-transform: translateY(139px);
+  transform: translateY(139px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.hovereffect:hover h2 {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.hovereffect a.info {
+  display: inline-block;
+  text-decoration: none;
+  padding: 7px 14px;
+  text-transform: uppercase;
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: transparent;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  font-weight: normal;
+  margin:  0;
+  padding: 0 22px;
+}
+
+.hovereffect:hover a.info {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.hovereffect a.info:hover {
+  box-shadow: 0 0 5px #fff;
+}
+
+
+

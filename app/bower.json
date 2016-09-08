@@ -1,0 +1,14 @@
+{
+  "name": "app",
+  "main": "app.js",
+  "homepage": "https://github.com/JinySong/16-08-TechJobBucket",
+  "description": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
