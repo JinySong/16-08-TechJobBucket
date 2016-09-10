@@ -35,7 +35,7 @@
 
 
 
-
+<div class="container">
 
 <h1>Welcome, User!</h1>
 
@@ -50,10 +50,14 @@
   
   <div class="col-md-10">
     <div>
-      <button class="btn" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}' ng-click='ctrl.changeStatus(job.posting._id,"researched")'><span ng-class='{"glyphicon glyphicon-ok":job.researched,"glyphicon glyphicon-remove":!job.researched}' aria-hidden="true" > Research Position</button>
-      <button class="btn btn-default" ng-class='{"btn-success":job.resumed, "btn-danger":!job.resumed}' ng-click='ctrl.changeStatus(job.posting._id,"resumed")'><span ng-class='{"glyphicon glyphicon-ok":job.resumed,"glyphicon glyphicon-remove":!job.resumed}' aria-hidden="true"> Prepare Resume and Cover Letter</button>
-      <button class="btn btn-default" ng-class='{"btn-success":job.applied, "btn-danger":!job.applied}' ng-click='ctrl.changeStatus(job.posting._id,"applied")'><span ng-class='{"glyphicon glyphicon-ok":job.applied,"glyphicon glyphicon-remove":!job.applied}' aria-hidden="true"> Submit Application </button>
-      <button class="btn btn-default" ng-class='{"btn-success":job.interviewed, "btn-danger":!job.interviewed}' ng-click='ctrl.changeStatus(job.posting._id,"interviewed")'><span ng-class='{"glyphicon glyphicon-ok":job.interviewed,"glyphicon glyphicon-remove":!job.interviewed}' aria-hidden="true"> Go for Interview</button>
+      <button class="btn btn-round" ng-class='{"btn-success":job.researched, "btn-danger":!job.researched}' ng-click='ctrl.changeStatus(job.posting._id,"researched")'><span ng-class='{"glyphicon glyphicon-ok":job.researched,"glyphicon glyphicon-remove":!job.researched}' aria-hidden="true" ></button>
+      <span>Research Position</span>
+      <button class="btn btn-default btn-round" ng-class='{"btn-success":job.resumed, "btn-danger":!job.resumed}' ng-click='ctrl.changeStatus(job.posting._id,"resumed")'><span ng-class='{"glyphicon glyphicon-ok":job.resumed,"glyphicon glyphicon-remove":!job.resumed}' aria-hidden="true"></button>
+      <span>Prepare Resume and Cover Letter</span>
+      <button class="btn btn-default btn-round" ng-class='{"btn-success":job.applied, "btn-danger":!job.applied}' ng-click='ctrl.changeStatus(job.posting._id,"applied")'><span ng-class='{"glyphicon glyphicon-ok":job.applied,"glyphicon glyphicon-remove":!job.applied}' aria-hidden="true"></button>
+      <span>Submit Application</span>
+      <button class="btn btn-default btn-round" ng-class='{"btn-success":job.interviewed, "btn-danger":!job.interviewed}' ng-click='ctrl.changeStatus(job.posting._id,"interviewed")'><span ng-class='{"glyphicon glyphicon-ok":job.interviewed,"glyphicon glyphicon-remove":!job.interviewed}' aria-hidden="true"></button>
+      <span>Go for Interview</span>
     </div>
     <div><textarea class="form-control" rows='3' placeholder="{{job.notes  || 'notes: '}}" ng-model='job.notes'></textarea></div>
     <div class="pull-right">
@@ -61,7 +65,10 @@
       <button class="btn btn-default" ng-click='ctrl.deleteJob(job.posting._id)'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Job</button>
     </div>
   </div>
+
+
     
       
+</div>
 </div>
 </div>
