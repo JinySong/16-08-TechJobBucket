@@ -23,6 +23,8 @@
 		joblVm.scrollNav = scrollNav;
 		joblVm.scrollToAnchor = scrollToAnchor;
 		joblVm.docReady = docReady;
+		joblVm.validEmail = validEmail;
+
 		docReady();
 		scrollNav()
 		var stopLoop = !0;
@@ -171,6 +173,11 @@
 				console.log($location.path());
 				$location.path('/user/'+email);
 			})
+		}
+
+		function validEmail() {
+			var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    		return regex.test(joblVm.email);
 		}
 
 
