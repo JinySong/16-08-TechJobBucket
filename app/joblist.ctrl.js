@@ -88,11 +88,15 @@
 	  			// console.log($("#progress").scrollTop())
 
 
-			    if (scroll >= 100) {
-			        $(".navbar").addClass("nav-fixed");
-			    } else {
-			        $(".navbar").removeClass("nav-fixed");
-			    }
+	  			if (!joblVm.localStorage) {
+	  				if (scroll >= 100) {
+			        	$(".navbar").addClass("nav-fixed");
+					} else {
+					    $(".navbar").removeClass("nav-fixed");
+				    }
+	  			}
+
+			    
 
 			    if (scroll >= 2) $('.seeMore').addClass('animated fadeOut')
 
@@ -134,22 +138,16 @@
 		}
 
 		function register(){
-			console.log('how many times this will run')
-			//check passwords
-			if(joblVm.password == joblVm.repassword && joblVm.password != ''){
-				var user = {
-					email:joblVm.email,
-					password:joblVm.password
-				}
-				user = JSON.stringify(user);
-				$http.post('/addUser',user)
-				.then(function(res){
-					authenticate();
-				})
+			var user = {
+				email:joblVm.email,
+				password:joblVm.password
 			}
-			else{
-				joblVm.register_btn = "Passwords Don't Match";
-			}
+			user = JSON.stringify(user);
+			$http.post('/addUser',user)
+			.then(function(res){
+				authenticate();
+			})
+
 		}
 
 		function authenticate(){

@@ -385,6 +385,17 @@ http://wizardconstructions.com/resources/bg/career.jpg
 
 
 
+#userPage h1, #searchField {
+  padding-top: 110px;
+  padding-bottom: 40px;
+}
+
+
+
+
+
+
+
 
 
 .modal-dialog {

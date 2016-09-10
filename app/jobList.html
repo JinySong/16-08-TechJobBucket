@@ -1,7 +1,7 @@
 <!-- <div class="container-fluid"> -->
 
 
-<nav class="nav-top navbar navbar-main navbar-default">
+<nav class="navbar navbar-main navbar-default" ng-class="{'nav-top': !ctrl.localStorage, 'nav-fixed-stay': ctrl.localStorage}">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -63,7 +63,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-default" ng-class="{disabled: (ctrl.password != ctrl.repassword || !ctrl.validEmail() || !ctrl.password)}" data-dismiss="modal" ng-click='ctrl.register()'>Register</button>
+          <button type="submit" class="btn btn-default" ng-class="{'disabled': ( ctrl.password != ctrl.repassword || !ctrl.validEmail() || !ctrl.password )}" data-dismiss="modal" ng-click='ctrl.register()'>Register</button>
         </div>
       </form>
       
@@ -98,7 +98,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-default" ng-class="{disabled: !ctrl.validEmail() || !ctrl.password)}" data-dismiss="modal" ng-click='ctrl.authenticate()'>Log In</button>
+          <button type="submit" class="btn btn-default" ng-class="{'disabled': !ctrl.validEmail() || !ctrl.password}" data-dismiss="modal" ng-click='ctrl.authenticate()'>Log In</button>
         </div>
       </form>
       
@@ -109,7 +109,7 @@
 
 
 
-
+<div ng-show='!ctrl.localStorage'>
 <!-- <div class="parallax-container">
 <div class="parallax"> -->
 <div class="jumbotron">
@@ -227,12 +227,12 @@
 
   </section>
 
+</div>
 
 
 
 
-
-<div class="container">
+<div id='searchField' class="container">
 
   <div class="search container-fluid">
     <form class="navbar-form navbar-left">
