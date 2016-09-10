@@ -28,21 +28,28 @@ app.use(bodyParser.urlencoded({extended:false}));
 //var authentication = require("./middleware/auth");
 
 //models.sequelize.sync().then(function(){
-<<<<<<< HEAD
+
 	app.listen(8080,function(){
-=======
-	app.listen(80,function(){
->>>>>>> e32e87c9ad31cc6682aa269af43c39e23f647c20
+
 		console.log('Listening on http://localhost:%s',8080);
 		console.log('Stop Server With CTRL + C');
 	});
 //});
 
-//SCRAPING
-var scrapeFreshBooks = require('./scrape/FreshBooks')
-FreshBooksData = scrapeFreshBooks();
-var scrapeShopify = require('./scrape/Shopify')
-ShopifyData = scrapeShopify();
+
+
+
+app.get('/scrape', function (req,res) {
+	// var scrapeFreshBooks = require('./scrape/FreshBooks')
+	// FreshBooksData = scrapeFreshBooks();
+	var scrapeShopify = require('./scrape/Shopify')
+	ShopifyData = scrapeShopify();
+	res.send('Scraped!');
+})
+
+
+
+
 
 app.get('/', function(req, res) {
 	res.send('Express is running!');

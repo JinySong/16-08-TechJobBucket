@@ -37,6 +37,7 @@ big();
       //console.log(length)
       cheerio.load(body)('div.view-content span.field-content a').each(function(i,j) {
         var link = cheerio.load(body)(j).attr('href')
+        //console.log(link)
         request(link, function(err,res,body) { //change to link
           if(!err) {
             var Company = 'Konrad'
@@ -45,14 +46,15 @@ big();
             ComDes += '\n\nKonrad Group is a full-service digital consultancy providing digital consulting, design, and development services for our clients. Our Design-Driven Technology™ approach has delivered solutions in use by over 20 million people in 50 countries around the globe.'
 
             var ApplyLink = res.request.uri.href
-            var Website = res.request.uri.href
+            var Website = 'http://www.konradgroup.com/'
             var Title = cheerio.load(body)('h1').text();
             var Location = cheerio.load(body)('li[title="Location"]').text();
             var Type = cheerio.load(body)('#resumator-job-employment').text().replace(/(\r\n|\n|\r|\s)/gm,'');
-            var Resli = (cheerio.load(body)('p:contains("Responsibilities")').next('ul').html() || '').replace(/<.+?>/g,'').split('</li>');
-            var Reqli = (cheerio.load(body)('p:contains("Successful candidates will have: ")').next('ul').html() || '').replace(/<.+?>/g,'').split('</li>');
+            // var Resli = (cheerio.load(body)('p:contains("Responsibilities")').next('ul').html() || '').replace(/<.+?>/g,'').split('</li>');
+            // var Reqli = (cheerio.load(body)('p:contains("Successful candidates will have: ")').next('ul').html() || '').replace(/<.+?>/g,'').split('</li>');
+            var Body = cheerio.load(body)('div.description').html()
       
-            console.log(Title, Reqli, '\n\n')
+            console.log(Title, Body)
           } else {
             console.log(err)
           }

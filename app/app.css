@@ -56,7 +56,7 @@
   
 
 /*nav-fixed*/
-.nav-fixed.navbar-main {
+.nav-fixed.navbar-main, .nav-fixed-stay.navbar-main   {
   background: white;
   border: none;
   font: black;
@@ -70,7 +70,8 @@
   transition: all .8s ease-in-out;
 }
 
-.nav-fixed.navbar-main .navbar-nav > li > a {
+.nav-fixed.navbar-main .navbar-nav > li > a,
+.nav-fixed-stay.navbar-main .navbar-nav > li > a  {
   color: black;
   transition: all .2s ease-in; 
   padding-top: 30px;
@@ -78,16 +79,19 @@
 }
 
 .nav-fixed.navbar-main .navbar-nav > li > a:hover,
-.nav-fixed.navbar-main .navbar-nav > li > a:focus {
+.nav-fixed.navbar-main .navbar-nav > li > a:focus,
+.nav-fixed-stay.navbar-main .navbar-nav > li > a:hover,
+.nav-fixed-stay.navbar-main .navbar-nav > li > a:focus  {
   color: gray; }
 
-.nav-fixed.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+.nav-fixed.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand,
+.nav-fixed-stay.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
   font-size: 30px;
   margin-top: 20px;
   margin-left: 57px;
   color: black; }
 
-.nav-fixed .logo {
+.nav-fixed .logo, .nav-fixed-stay .logo  {
   -webkit-filter: brightness(100) invert(1);
   height: 50%;
   position: absolute;

@@ -51,7 +51,7 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
               newJob.Title = cheerio.load(body)('h1').text();
               var p = (cheerio.load(body)('.job-description.u-text-wrap p:nth-child(1)').text().length>100) ? 3 : 2; 
               newJob.ResSum = cheerio.load(body)('.job-description.u-text-wrap p:nth-child('+p+')').text();
-              newJob.ResLi = (cheerio.load(body)('.job-description.u-text-wrap ul').html()).replace(/<li>/g,'').replace(/(\r\n|\n|\r)/gm,'').replace(/<\/li>/g,'xxx').split('xxx');
+              //newJob.ResLi = (cheerio.load(body)('.job-description.u-text-wrap ul').html()).replace(/<li>/g,'').replace(/(\r\n|\n|\r)/gm,'').replace(/<\/li>/g,'xxx').split('xxx') || "";
               newJob.ReqLi = (cheerio.load(body)('.job-description.u-text-wrap ul:nth-of-type(2)').html()).replace(/<li>/g,'').replace(/(\r\n|\n|\r)/gm,'').replace(/<\/li>/g,'xxx').split('xxx');
               newJob.ApplyLink = cheerio.load(body)('div.u-text-center a.button-primary.u-text-center').attr("href").split('</li>')[0];
 
