@@ -40,6 +40,11 @@
 <h1>Welcome, User!</h1>
 
 <hr>
+<div ng-show='!ctrl.user.jobSaved.length'>
+  <h2>Oops! Looks like you don't have any saved jobs yet! <a ng-click='ctrl.goHome()'>Click here</a> to go the home page to see all jobs. Once you save a posting, you'll be able to track your progress and add notes!</h2>
+</div>
+
+
 
 <div class="media row" ng-repeat='job in ctrl.user.jobSaved'">
     
