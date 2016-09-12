@@ -46,8 +46,14 @@ app.get('/scrape', function (req,res) {
 	// KonradData = scrapeKonrad();
 	// var scrapeTopHat = require('./scrape/TopHat')
 	// TopHatData = scrapeTopHat();
-	var scrapeVarageSale = require('./scrape/VarageSale')
-	VarageSaleData = scrapeVarageSale();
+	// var scrapeVarageSale = require('./scrape/VarageSale')
+	// VarageSaleData = scrapeVarageSale();
+	// var scrapeQuickTapSurvey = require('./scrape/QuickTapSurvey')
+	// QuickTapSurveyData = scrapeQuickTapSurvey();
+	// var scrapeBorrowell = require('./scrape/Borrowell')
+	// BorrowellData = scrapeBorrowell();
+	var scrapeUnata = require('./scrape/Unata')
+	UnataData = scrapeUnata();
 	// var scrapeShopify = require('./scrape/Shopify')
 	// ShopifyData = scrapeShopify();
 	res.send('Scraped!');
