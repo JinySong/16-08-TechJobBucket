@@ -42,6 +42,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.get('/scrape', function (req,res) {
 	var scrapeFreshBooks = require('./scrape/FreshBooks')
 	FreshBooksData = scrapeFreshBooks();
+	var scrapeKonrad = require('./scrape/Konrad')
+	KonradData = scrapeKonrad();
 	// var scrapeShopify = require('./scrape/Shopify')
 	// ShopifyData = scrapeShopify();
 	res.send('Scraped!');

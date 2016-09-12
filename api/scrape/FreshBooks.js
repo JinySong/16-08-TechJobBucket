@@ -3,8 +3,8 @@ var cheerio = require('cheerio');
 var Job = require('./../models/Job');
 
 var jobs = [];
-asdf();
-function asdf() {
+
+module.exports = function () {
 request('https://www.freshbooks.com/careers', function(err,res,body) {
   if(!err) {
     var count = 0;
@@ -56,7 +56,7 @@ request('https://www.freshbooks.com/careers', function(err,res,body) {
 
               if (done) {
                 console.log('freshbooks done');
-                console.log(jobs);
+                //console.log(jobs);
                 return jobs;
 
                 
