@@ -40,10 +40,10 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 
 app.get('/scrape', function (req,res) {
-	// var scrapeFreshBooks = require('./scrape/FreshBooks')
-	// FreshBooksData = scrapeFreshBooks();
-	var scrapeShopify = require('./scrape/Shopify')
-	ShopifyData = scrapeShopify();
+	var scrapeFreshBooks = require('./scrape/FreshBooks')
+	FreshBooksData = scrapeFreshBooks();
+	// var scrapeShopify = require('./scrape/Shopify')
+	// ShopifyData = scrapeShopify();
 	res.send('Scraped!');
 })
 

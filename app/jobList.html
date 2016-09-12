@@ -232,7 +232,7 @@
 
 
 
-<div id='searchField' class="container">
+<div id='search' class="container">
 
   <div class="search container-fluid">
     <form class="navbar-form navbar-left">
@@ -257,7 +257,7 @@
   <div ng-repeat="job in ctrl.filtered = (ctrl.jobs|
       filter: {Title:ctrl.search} | 
       orderBy: ctrl.sortSelect.sortField : ctrl.sortSelect.reverse)"
-    ng-click="ctrl.goToJob(job._id)" class="listing-border col-lg-3 col-md-4 col-sm-6 col-xs-12">
+    ng-click="ctrl.goToJob(job.PostLink, '_blank')" class="listing-border col-lg-3 col-md-4 col-sm-6 col-xs-12">
       <div class="hovereffect listing-box">
           <img class="img-responsive" ng-src="{{job.Logo}}" alt="">
               <div class="overlay">

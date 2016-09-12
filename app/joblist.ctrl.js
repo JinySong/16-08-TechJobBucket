@@ -42,8 +42,9 @@
 
         
 		
-	  	function goToJob(id){
-	  		$location.path('/job/'+id)
+	  	function goToJob(id,target){
+	  		//$location.path('/job/'+id)
+	  		window.open(id,target)
 	  	}
 
 	  	function goToSignUp() {
