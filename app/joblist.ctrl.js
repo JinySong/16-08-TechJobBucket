@@ -72,8 +72,9 @@
 		}
 		//test this
 	  	function saveJob(jobId) {
-	  		return $http.get('/saveLink/'+localStorage.loginEmail+'/'+jobId).then(function(res) {
-	            console.log('Job Saved to User')
+	  		$http.get('/saveLink/'+localStorage.loginEmail+'/'+jobId).then(function(res) {
+	            //$location.path('user/'+localStorage.loginEmail)
+	            joblVm.goToAcc()
 	        }, function(err) {
 	            console.log('Job did not save to user: ', err)
 	        })

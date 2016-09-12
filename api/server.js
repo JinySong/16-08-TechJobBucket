@@ -357,8 +357,10 @@ app.get('/saveLink/:Email/:JobId',function(req,res) {
 				        }
 		    		});
 	        	}
+
 	        })
 		}
+		res.send('Job saved to user')
 	});
 });
 

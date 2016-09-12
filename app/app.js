@@ -34,7 +34,7 @@
 						if(!localStorage.authToken || localStorage.loginEmail != $route.current.params.Id){
 								console.log('redirect')
 								$timeout(function(){
-									$location.path('/registerLogin')
+									$location.path('/')
 								},0)
 								return $q.reject;
 							}
@@ -42,9 +42,9 @@
 						
 					}
 	            })
-	            .otherwise({
-	              redirectTo: '/home'
-	            });
+	            // .otherwise({
+	            //   redirectTo: '/home'
+	            // });
 
 	    $httpProvider.interceptors.push(function(jwtHelper){
 				return{
