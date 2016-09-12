@@ -44,8 +44,10 @@ app.get('/scrape', function (req,res) {
 	// FreshBooksData = scrapeFreshBooks();
 	// var scrapeKonrad = require('./scrape/Konrad')
 	// KonradData = scrapeKonrad();
-	var scrapeTopHat = require('./scrape/TopHat')
-	TopHatData = scrapeTopHat();
+	// var scrapeTopHat = require('./scrape/TopHat')
+	// TopHatData = scrapeTopHat();
+	var scrapeVarageSale = require('./scrape/VarageSale')
+	VarageSaleData = scrapeVarageSale();
 	// var scrapeShopify = require('./scrape/Shopify')
 	// ShopifyData = scrapeShopify();
 	res.send('Scraped!');

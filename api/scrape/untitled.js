@@ -3,21 +3,24 @@ var cheerio = require('cheerio');
 
 big();
 function big (){
-  request('http://jobs.jobvite.com/top-hat', function(err,res,body){
+  request('https://boards.greenhouse.io/embed/job_board?for=varagesale&b=https://www.varagesale.com/jobs', function(err,res,body){
     if(!err) {
-      var length = cheerio.load(body)('td.jv-job-list-name a').length
-      console.log(length)
+      var length = cheerio.load(body)('a').length
 
 
-      cheerio.load(body)('td.jv-job-list-name a').each(function(i,j) {
+      cheerio.load(body)('a').each(function(i,j){
         var newJob = {};
         newJob.Title = cheerio.load(body)(j).text();
-        newJob.PostLink = 'https://jobs.jobvite.com'+ cheerio.load(body)(j).attr('href')
-        newJob.Website = 'https://tophat.com/'
-        newJob.Company = 'TopHat'
-        newJob.Logo = 'https://corp-cdn.tophat.com/wp-content/themes/corporate-wp-theme-newui/dist/images/tophat-logo-blue.svg'
+        newJob.PostLink = cheerio.load(body)(j).attr('href')
+        newJob.Website = 'https://www.varagesale.com/'
+        newJob.Company = 'VarageSale'
+        newJob.Logo = 'http://www.acfb.org/sites/default/files/media/varage-sale-logo.png'
         console.log(newJob)
       })
+
+
+
+
 
 
 
