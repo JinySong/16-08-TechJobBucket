@@ -3,22 +3,25 @@ var cheerio = require('cheerio');
 
 big();
 function big (){
-  request('http://www.konradgroup.com/careers', function(err,res,body){
+  request('http://jobs.jobvite.com/top-hat', function(err,res,body){
     if(!err) {
-      var length = cheerio.load(body)('div.view-content span.field-content a').length
-      //console.log(length)
-      cheerio.load(body)('div.view-content span.field-content a').each(function(i,j) {
-        var newJob = {}
-        newJob.PostLink = cheerio.load(body)(j).attr('href')
-        newJob.Website = 'http://www.konradgroup.com/'
-        newJob.Company = 'Konrad'
-        newJob.Logo = 'http://auth.konradgroup.com/Content/images/loginLogo.png'
-        newJob.Title = cheerio.load(body)(j).text()
+      var length = cheerio.load(body)('td.jv-job-list-name a').length
+      console.log(length)
 
 
+      cheerio.load(body)('td.jv-job-list-name a').each(function(i,j) {
+        var newJob = {};
+        newJob.Title = cheerio.load(body)(j).text();
+        newJob.PostLink = 'https://jobs.jobvite.com'+ cheerio.load(body)(j).attr('href')
+        newJob.Website = 'https://tophat.com/'
+        newJob.Company = 'TopHat'
+        newJob.Logo = 'https://corp-cdn.tophat.com/wp-content/themes/corporate-wp-theme-newui/dist/images/tophat-logo-blue.svg'
         console.log(newJob)
+      })
 
-    })
+
+
+
     }
   })
 }
