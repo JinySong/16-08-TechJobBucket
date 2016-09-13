@@ -130,8 +130,8 @@
 			    }
 
 			    if (scroll >= $("#statistics-section").position().top - $(window).height() && stopLoop) {
-					$('#statJob').animateNumber({ number: joblVm.jobs.length*10 },2000);
-					$('#statCo').animateNumber({ number: joblVm.company.length*10 }, 2000);
+					$('#statJob').animateNumber({ number: joblVm.jobs.length },2000);
+					$('#statCo').animateNumber({ number: joblVm.company.length }, 2000);
 					$('#statSaved').animateNumber({ number: 312 }, 2000);
 					$('#statUser').animateNumber({ number: 103 }, 2000);
 					stopLoop = !1;
