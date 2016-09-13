@@ -274,6 +274,18 @@ http://wizardconstructions.com/resources/bg/career.jpg
   margin-top: 20px;
 }
 
+/*Devices*/
+#devices {
+  color: #204DB0;
+}
+
+#devices .text-center {
+  padding-top: 100px;  
+}
+
+#devices p {
+  font-size: 18px;
+}
 
 
 /*user*/
@@ -382,6 +394,17 @@ http://wizardconstructions.com/resources/bg/career.jpg
   box-shadow: 0 0 5px #fff; }
 
 /*# sourceMappingURL=app.css.map */
+
+
+
+#devices img {
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+
 
 
 

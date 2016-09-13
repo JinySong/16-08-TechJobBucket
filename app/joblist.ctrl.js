@@ -114,6 +114,11 @@
 
 			    if (scroll >= 2) $('.seeMore').addClass('animated fadeOut')
 
+			    if ($("#devices").position().top && scroll >= $("#devices").position().top - $(window).height()) {
+			        $("#devices img").addClass("visibleYES animated fadeInLeft");
+			        $("#devices h1, #devices p").addClass("visibleYES animated fadeInRight");
+			    }
+
 			    if ($("#features-section").position().top && scroll >= $("#features-section").position().top - $(window).height()) {
 			        $("#features-section h2").addClass("visibleYES animated fadeIn");
 			        $("#features-section .col-md-6").addClass("visibleYES animated fadeInUp");
