@@ -56,9 +56,10 @@
 			$location.path('/home');
 		}
 
-		function goToJob(id) {
-	  		$location.path('/job/'+id)
-		}
+		function goToJob(id,target){
+	  		//$location.path('/job/'+id)
+	  		window.open(id,target)
+	  	}
 
 		function deleteJob(jobId) {
 	  		return $http.get('/deleteJob/'+localStorage.loginEmail+'/'+jobId).then(function(res) {

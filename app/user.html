@@ -48,7 +48,7 @@
 
 <div class="media row" ng-repeat='job in ctrl.user.jobSaved'">
     
-  <div class="col-md-2 hvr-float-shadow" ng-click="ctrl.goToJob(job.posting._id)">
+  <div class="col-md-2 hvr-float-shadow" ng-click="ctrl.goToJob(job.posting.PostLink, '_blank')">
     <img class="img-responsive" ng-src="{{job.posting.Logo}}">
     <h4>{{job.posting.Title}}</h4>
   </div>
