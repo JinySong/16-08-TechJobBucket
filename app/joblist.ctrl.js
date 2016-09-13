@@ -5,6 +5,18 @@
 		var joblVm = this;
 
 	 	joblVm.jobs = jobSrv.getJobs();
+	 	joblVm.company = [];
+
+	 	function addCom (){
+	 		// console.log(joblVm.company)
+	 		for (var i=0; i<joblVm.jobs.length; i++) {
+	 			console.log(joblVm.jobs[i].Company)
+	 			// console.log(joblVm.company.indexOf(joblVm.jobs[i].company))
+	 			if (joblVm.company.indexOf(joblVm.jobs[i].Company) == -1) 
+	 				joblVm.company.push(joblVm.jobs[i].Company)
+	 		}
+	 	};
+	 	addCom()
 	  
 	  	joblVm.sortOptions = [
 		    {label: 'Position', sortField: 'Title', reverse: false},
@@ -113,8 +125,8 @@
 			    }
 
 			    if (scroll >= $("#statistics-section").position().top - $(window).height() && stopLoop) {
-					$('#statJob').animateNumber({ number: 1450 },2000);
-					$('#statCo').animateNumber({ number: 245 }, 2000);
+					$('#statJob').animateNumber({ number: joblVm.jobs.length*10 },2000);
+					$('#statCo').animateNumber({ number: joblVm.company.length*10 }, 2000);
 					$('#statSaved').animateNumber({ number: 312 }, 2000);
 					$('#statUser').animateNumber({ number: 103 }, 2000);
 					stopLoop = !1;
