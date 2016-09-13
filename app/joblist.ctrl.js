@@ -158,6 +158,7 @@
 
 		function register(){
 			var user = {
+				name: joblVm.name,
 				email:joblVm.email,
 				password:joblVm.password
 			}
