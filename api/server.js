@@ -40,22 +40,24 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 
 app.get('/scrape', function (req,res) {
-	// var scrapeFreshBooks = require('./scrape/FreshBooks')
-	// FreshBooksData = scrapeFreshBooks();
-	// var scrapeKonrad = require('./scrape/Konrad')
-	// KonradData = scrapeKonrad();
-	// var scrapeTopHat = require('./scrape/TopHat')
-	// TopHatData = scrapeTopHat();
-	// var scrapeVarageSale = require('./scrape/VarageSale')
-	// VarageSaleData = scrapeVarageSale();
-	// var scrapeQuickTapSurvey = require('./scrape/QuickTapSurvey')
-	// QuickTapSurveyData = scrapeQuickTapSurvey();
-	// var scrapeBorrowell = require('./scrape/Borrowell')
-	// BorrowellData = scrapeBorrowell();
-	var scrapeUnata = require('./scrape/Unata')
-	UnataData = scrapeUnata();
-	// var scrapeShopify = require('./scrape/Shopify')
-	// ShopifyData = scrapeShopify();
+	var scrapeFreshBooks = require('./scrape/FreshBooks')
+	FreshBooksData = scrapeFreshBooks();
+	var scrapeKonrad = require('./scrape/Konrad')
+	KonradData = scrapeKonrad();
+	var scrapeTopHat = require('./scrape/TopHat')
+	TopHatData = scrapeTopHat();
+	var scrapeVarageSale = require('./scrape/VarageSale')
+	VarageSaleData = scrapeVarageSale();
+	var scrapeQuickTapSurvey = require('./scrape/QuickTapSurvey')
+	QuickTapSurveyData = scrapeQuickTapSurvey();
+	var scrapeBorrowell = require('./scrape/Borrowell')
+	BorrowellData = scrapeBorrowell();
+	// var scrapeUnata = require('./scrape/Unata')
+	// UnataData = scrapeUnata();
+	var scrapeSlack = require('./scrape/Slack')
+	SlackData = scrapeSlack();
+	var scrapeShopify = require('./scrape/Shopify')
+	ShopifyData = scrapeShopify();
 	res.send('Scraped!');
 })
 

@@ -9,7 +9,7 @@ module.exports = function () {
     request('https://slack.com/jobs', function(err,res,body){
     if(!err) {
       var length = cheerio.load(body)('div.card.postings a.posting_title').length
-      console.log(length)
+      //console.log(length)
 
       cheerio.load(body)('div.card.postings a.posting_title').each(function(i,j){
         var newJob = {};

@@ -42,9 +42,9 @@
 						
 					}
 	            })
-	            // .otherwise({
-	            //   redirectTo: '/home'
-	            // });
+	            .otherwise({
+	              redirectTo: '/home'
+	            });
 
 	    $httpProvider.interceptors.push(function(jwtHelper){
 				return{

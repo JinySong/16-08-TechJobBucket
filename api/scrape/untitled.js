@@ -3,18 +3,18 @@ var cheerio = require('cheerio');
 
 big();
 function big (){
-  request('https://unata.com/careers/', function(err,res,body){
+  request('https://www.shopify.com/careers', function(err,res,body){
     if(!err) {
-      var length = cheerio.load(body)('div.o-grid.-bottom.-margin a.c-career_link').text()
+      var length = cheerio.load(body)('#work-at-shopify div.page-width div.section-block.grid-container.grid-container--thirds a.body-link').length
       console.log(length)
 
-      cheerio.load(body)('div.o-grid.-bottom.-margin a.c-career_link').each(function(i,j){
+      cheerio.load(body)('#work-at-shopify div.page-width div.section-block.grid-container.grid-container--thirds a.body-link').each(function(i,j){
         var newJob = {};
-        newJob.Title = cheerio.load(j)('h2').text();
-        newJob.PostLink = cheerio.load(body)(j).attr('href')
-        newJob.Website = 'https://unata.com/'
-        newJob.Company = 'Unata'
-        newJob.Logo = 'https://gust-production.s3.amazonaws.com/uploads/startup/logo_image/52084/logo.png'
+        newJob.Title = cheerio.load(body)(j).text();
+        newJob.PostLink = 'https://www.shopify.com' + cheerio.load(body)(j).attr('href')
+        newJob.Website = 'https://www.shopify.com'
+        newJob.Company = 'Shopify'
+        newJob.Logo = 'https://www.zoho.com/inventory/help/images/market-places/shopify-logo.png'
         console.log(newJob)
       })
 
